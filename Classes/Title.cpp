@@ -16,6 +16,17 @@ bool Title::init()
 		return false;
 	}
 	this->schedule(schedule_selector(Title::Update));
+
+	//ウィンドウサイズ所得
+	cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
+	//原点所得
+	cocos2d::Vec2 origin = cocos2d::Director::getInstance()->getVisibleOrigin();
+
+	auto Background = cocos2d::Sprite::create("Title/BackGround.png");
+
+	Background->setPosition(cocos2d::Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
+	this->addChild(Background, 1);
+
 	return true;
 }
 

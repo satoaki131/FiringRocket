@@ -11,6 +11,7 @@ public:
 	static cocos2d::Scene* scene();
 
 	void Update(float delta);
+	virtual void onMouseDown(cocos2d::Event* event);
 
 	CREATE_FUNC(Title);
 };

@@ -1,5 +1,7 @@
 #include "Title.h"
 #include "GameScene.h"
+#include <base/CCEventListenerMouse.h>
+#include <base/CCEvent.h>
 
 cocos2d::Scene* Title::scene()
 {
@@ -15,7 +17,11 @@ bool Title::init()
 	{
 		return false;
 	}
-	this->schedule(schedule_selector(Title::Update));
+
+	auto dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
+	auto mouselistener = cocos2d::EventListenerMouse::create();
+	mouselistener->onMouseDown = CC_CALLBACK_1(Title::onMouseDown, this);
+	dispatcher->addEventListenerWithSceneGraphPriority(mouselistener, this);
 
 	//ウィンドウサイズ所得
 	cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
@@ -27,14 +33,22 @@ bool Title::init()
 	Background->setPosition(cocos2d::Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
 	this->addChild(Background, 1);
 
+	this->schedule(schedule_selector(Title::Update));
+
+
 	return true;
 }
 
 void Title::Update(float delta)
 {
-	run++;
-	if (run == 60)
-	{
-		cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(2.0f, GameScene::CreateScene(), cocos2d::Color3B::WHITE));
-	}
+	//run++;
+	//if (run == 120)
+	//{
+	//	cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(2.0f, GameScene::CreateScene(), cocos2d::Color3B::WHITE));
+	//}
+}
+
+void Title::onMouseDown(cocos2d::Event* event)
+{
+	cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(2.0f, GameScene::CreateScene(), cocos2d::Color3B::WHITE));
 }

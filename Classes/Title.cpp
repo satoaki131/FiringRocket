@@ -12,7 +12,6 @@ cocos2d::Scene* Title::scene()
 }
 bool Title::init() 
 {
-	run = 0;
 	if (!Layer::init())
 	{
 		return false;
@@ -28,9 +27,12 @@ bool Title::init()
 	//Œ´“_Š“¾
 	cocos2d::Vec2 origin = cocos2d::Director::getInstance()->getVisibleOrigin();
 
+	pos = cocos2d::Vec2(visibleSize.width / 2 + origin.x + pos.x, visibleSize.height / 2 + origin.y + pos.y);
+
 	auto Background = cocos2d::Sprite::create("Title/BackGround.png");
 
-	Background->setPosition(cocos2d::Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
+	Background->setPosition(pos);
+	Background->setTag(1);
 	this->addChild(Background, 1);
 
 	this->schedule(schedule_selector(Title::Update));
@@ -41,11 +43,10 @@ bool Title::init()
 
 void Title::Update(float delta)
 {
-	//run++;
-	//if (run == 120)
-	//{
-	//	cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(2.0f, GameScene::CreateScene(), cocos2d::Color3B::WHITE));
-	//}
+	auto BackGround = this->getChildByTag(1);
+	BackGround->setPosition(pos);
+	pos.x += 0.5f;
+
 }
 
 void Title::onMouseDown(cocos2d::Event* event)

@@ -5,7 +5,8 @@
 
 class Title : public cocos2d::Layer
 {
-	int run;
+private:
+	cocos2d::Vec2 pos;
 public:
 	virtual bool init();
 	static cocos2d::Scene* scene();

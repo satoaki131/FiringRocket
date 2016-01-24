@@ -1,6 +1,6 @@
 #include "Title.h"
 #include "GameScene.h"
-#include <base/CCEventListenerMouse.h>
+#include <base/CCEventMouse.h>
 #include <base/CCEvent.h>
 
 cocos2d::Scene* Title::scene()
@@ -10,14 +10,16 @@ cocos2d::Scene* Title::scene()
 	scene->addChild(layer);
 	return scene;
 }
+
 bool Title::init() 
 {
 	if (!Layer::init())
 	{
 		return false;
 	}
-
+	//ディレクタクラス所得
 	auto dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
+	//マウス関連
 	auto mouselistener = cocos2d::EventListenerMouse::create();
 	mouselistener->onMouseDown = CC_CALLBACK_1(Title::onMouseDown, this);
 	dispatcher->addEventListenerWithSceneGraphPriority(mouselistener, this);
@@ -27,29 +29,49 @@ bool Title::init()
 	//原点所得
 	cocos2d::Vec2 origin = cocos2d::Director::getInstance()->getVisibleOrigin();
 
-	pos = cocos2d::Vec2(visibleSize.width / 2 + origin.x + pos.x, visibleSize.height / 2 + origin.y + pos.y);
+	background_pos = cocos2d::Vec2(visibleSize.width / 2 + origin.x + background_pos.x, visibleSize.height / 2 + origin.y + background_pos.y);
 
-	auto Background = cocos2d::Sprite::create("Title/BackGround.png");
+	//文字表示(文字, Font, FontSize)
+	auto title_label = cocos2d::Label::createWithTTF("Firing Rocket", "fonts/JKG-M_3.ttf", 65);
+	title_label->setColor(cocos2d::Color3B::ORANGE);
+	title_label->setPosition(cocos2d::Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 2 + title_label->getContentSize().height));
 
-	Background->setPosition(pos);
-	Background->setTag(1);
-	this->addChild(Background, 1);
+	auto start_label = cocos2d::Label::createWithTTF("Enter to Start", "fonts/JKG-M_3.ttf", 30);
+	start_label->setColor(cocos2d::Color3B::MAGENTA);
+	label_pos = cocos2d::Vec2(origin.x + visibleSize.width / 2 + label_pos.x, origin.y + visibleSize.height / 2 + title_label->getContentSize().height + label_pos.y - 150);
+	label_angle = 0.1f;
+	start_label->setPosition(label_pos);
+	start_label->setTag(2);
 
-	this->schedule(schedule_selector(Title::Update));
+	auto background = cocos2d::Sprite::create("Title/BackGround.png");
+	background->setPosition(background_pos);
 
+	//上から順に描画されていく
+	this->addChild(background, 1);
+	this->addChild(title_label, 1);
+	this->addChild(start_label, 1);
+
+	this->scheduleUpdate();
 
 	return true;
 }
 
-void Title::Update(float delta)
+void Title::update(float delta)
 {
-	auto BackGround = this->getChildByTag(1);
-	BackGround->setPosition(pos);
-	pos.x += 0.5f;
+	
+	auto start_label = this->getChildByTag(2);
+	start_label->setPosition(label_pos);
+	label_angle += 0.1f;
+	label_pos.y += std::sin(label_angle);
 
 }
 
 void Title::onMouseDown(cocos2d::Event* event)
 {
-	cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(2.0f, GameScene::CreateScene(), cocos2d::Color3B::WHITE));
+	//pushSceneは遷移前の情報を残したまま次のシーンに(popSceneは1つ前に戻る)。
+	//replaceSceneは遷移前のデータを完全に消して次のシーンに移動する
+	cocos2d::Director::getInstance()->replaceScene(
+		cocos2d::TransitionFade::create(2.0f, GameScene::scene(), cocos2d::Color3B::WHITE)
+		);
+	this->unscheduleUpdate();
 }

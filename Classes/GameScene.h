@@ -7,8 +7,9 @@ class GameScene : public cocos2d::Layer
 {
 public:
 	virtual bool init();
-	static cocos2d::Scene* CreateScene();
+	static cocos2d::Scene* scene();
 	
+	virtual void update(float delta);
 	void Update(float delta);
 
 	CREATE_FUNC(GameScene);

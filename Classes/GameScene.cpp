@@ -1,12 +1,11 @@
 #include "GameScene.h"
 
 using namespace cocos2d;
-using namespace std;
 
-Scene* GameScene::CreateScene()
+Scene* GameScene::scene()
 {
 	auto scene = Scene::create();
-	GameScene* layer = GameScene::create();
+	auto layer = GameScene::create();
 	scene->addChild(layer);
 
 	return scene;
@@ -18,14 +17,20 @@ bool GameScene::init()
 	{
 		return false;
 	}
-	this->schedule(schedule_selector(GameScene::Update));
+
+
+	
 	return true;
 }
 
 
-void  GameScene::Update(float delta)
+void GameScene::update(float delta)
 {
-	//ƒtƒŒ[ƒ€ˆ—
+	
+}
+
+void GameScene::Update(float delta)
+{
 
 }
 

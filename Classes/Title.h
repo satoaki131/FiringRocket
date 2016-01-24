@@ -6,12 +6,14 @@
 class Title : public cocos2d::Layer
 {
 private:
-	cocos2d::Vec2 pos;
+	cocos2d::Vec2 label_pos;
+	float label_angle;
+	cocos2d::Vec2 background_pos;
 public:
 	virtual bool init();
 	static cocos2d::Scene* scene();
 
-	void Update(float delta);
+	virtual void update(float delta);
 	virtual void onMouseDown(cocos2d::Event* event);
 
 	CREATE_FUNC(Title);

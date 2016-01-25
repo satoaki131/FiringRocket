@@ -1,6 +1,7 @@
 #include "Title.h"
 #include "GameScene.h"
 #include <base/CCEvent.h>
+#include "SimpleAudioEngine.h"
 
 cocos2d::Scene* Title::scene()
 {
@@ -29,6 +30,12 @@ bool Title::init()
 	keylistener->onKeyPressed = CC_CALLBACK_2(Title::onKeyPressed, this);
 	dispatcher->addEventListenerWithSceneGraphPriority(keylistener, this);
 
+	//サウンド関連
+	//あらかじめ読み込んでおいたほうが良い(やらなくてもいけるが、サイズによっては処理が遅くなるため、やっておいたほうが良い)
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("Sound/titleBGM.mp3");
+	//再生
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("Sound/titleBGM.mp3", true);
+
 	//ウィンドウサイズ所得
 	cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
 	//原点所得
@@ -48,7 +55,7 @@ bool Title::init()
 	start_label->setPosition(label_pos);
 	start_label->setTag(2);
 
-	auto background = cocos2d::Sprite::create("Title/BackGround.png");
+	auto background = cocos2d::Sprite::create("Texture/BackGround.png");
 	background->setPosition(background_pos);
 
 	//上から順に描画されていく

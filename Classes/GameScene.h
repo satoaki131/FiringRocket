@@ -10,7 +10,6 @@ public:
 	static cocos2d::Scene* scene();
 	
 	virtual void update(float delta);
-	void Update(float delta);
 
 	CREATE_FUNC(GameScene);
 

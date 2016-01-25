@@ -15,6 +15,7 @@ public:
 
 	virtual void update(float delta);
 	virtual void onMouseDown(cocos2d::Event* event);
+	virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 
 	CREATE_FUNC(Title);
 };

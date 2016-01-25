@@ -1,6 +1,5 @@
 #include "Title.h"
 #include "GameScene.h"
-#include <base/CCEventMouse.h>
 #include <base/CCEvent.h>
 
 cocos2d::Scene* Title::scene()
@@ -19,10 +18,16 @@ bool Title::init()
 	}
 	//ディレクタクラス所得
 	auto dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
+	
 	//マウス関連
-	auto mouselistener = cocos2d::EventListenerMouse::create();
-	mouselistener->onMouseDown = CC_CALLBACK_1(Title::onMouseDown, this);
-	dispatcher->addEventListenerWithSceneGraphPriority(mouselistener, this);
+	//auto mouselistener = cocos2d::EventListenerMouse::create();
+	//mouselistener->onMouseDown = CC_CALLBACK_1(Title::onMouseDown, this);
+	//dispatcher->addEventListenerWithSceneGraphPriority(mouselistener, this);
+
+	//キーボード関連
+	auto keylistener = cocos2d::EventListenerKeyboard::create();
+	keylistener->onKeyPressed = CC_CALLBACK_2(Title::onKeyPressed, this);
+	dispatcher->addEventListenerWithSceneGraphPriority(keylistener, this);
 
 	//ウィンドウサイズ所得
 	cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
@@ -74,4 +79,18 @@ void Title::onMouseDown(cocos2d::Event* event)
 		cocos2d::TransitionFade::create(2.0f, GameScene::scene(), cocos2d::Color3B::WHITE)
 		);
 	this->unscheduleUpdate();
+}
+
+void Title::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
+{
+	if (keyCode == cocos2d::EventKeyboard::KeyCode::KEY_ENTER)
+	{
+		//呼ばれる順番の問題
+		//scheduleは止めてからシーン移動処理が必要
+		this->unscheduleUpdate();
+		cocos2d::Director::getInstance()->replaceScene(
+			cocos2d::TransitionFade::create(2.0f, GameScene::scene(), cocos2d::Color3B::WHITE)
+			);
+	
+	}
 }

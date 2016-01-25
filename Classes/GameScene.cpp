@@ -18,7 +18,7 @@ bool GameScene::init()
 		return false;
 	}
 
-
+	this->scheduleUpdate();
 	
 	return true;
 }
@@ -28,9 +28,3 @@ void GameScene::update(float delta)
 {
 	
 }
-
-void GameScene::Update(float delta)
-{
-
-}
-

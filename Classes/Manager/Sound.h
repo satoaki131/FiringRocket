@@ -14,7 +14,8 @@ public:
 
 	void BGMInit(char* path);
 	void BGMPlay(bool loop);
-
+	void BGMStop();
+	
 	void EffectInit(char* path);
 	
 };

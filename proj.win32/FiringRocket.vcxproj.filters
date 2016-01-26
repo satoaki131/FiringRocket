@@ -16,6 +16,9 @@
     <Filter Include="src\Manager">
       <UniqueIdentifier>{ecfd553c-2450-4d33-ad5a-788c8bd9dc87}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Object">
+      <UniqueIdentifier>{1d6b1141-24cd-472c-8648-0fa68b0d14a4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -33,6 +36,9 @@
     <ClCompile Include="..\Classes\Manager\Sound.cpp">
       <Filter>src\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Object\Player.cpp">
+      <Filter>src\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -49,6 +55,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Manager\Sound.h">
       <Filter>src\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Object\Player.h">
+      <Filter>src\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

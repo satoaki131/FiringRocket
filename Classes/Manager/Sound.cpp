@@ -20,6 +20,7 @@ Sound::~Sound()
 
 void Sound::BGMInit(char* path)
 {
+	//あらかじめ読み込んでおいたほうが良い(やらなくてもいけるが、サイズによっては処理が遅くなるため、やっておいたほうが良い)
 	file_path = path;
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic(file_path);
 }
@@ -36,6 +37,11 @@ void Sound::BGMPlay(bool loop)
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(file_path, false);
 	}
 
+}
+
+void Sound::BGMStop()
+{
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
 }
 
 

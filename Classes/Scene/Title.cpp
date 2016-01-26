@@ -2,6 +2,7 @@
 #include "Scene/GameScene.h"
 #include <base/CCEvent.h>
 #include "SimpleAudioEngine.h"
+#include "Object/Player.h"
 
 cocos2d::Scene* Title::scene()
 {
@@ -59,11 +60,14 @@ bool Title::init()
 
 	auto background = cocos2d::Sprite::create("Texture/BackGround.png");
 	background->setPosition(background_pos);
-
+	
+	Player player;
+	player.setPos(visibleSize, origin);
 	//ã‚©‚ç‡‚É•`‰æ‚³‚ê‚Ä‚¢‚­
 	this->addChild(background, 1);
 	this->addChild(title_label, 1);
 	this->addChild(start_label, 1);
+	this->addChild(player.texture, 1);
 
 	this->scheduleUpdate();
 
@@ -99,7 +103,8 @@ void Title::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event
 		this->unscheduleUpdate();
 		cocos2d::Director::getInstance()->replaceScene(
 			cocos2d::TransitionFade::create(2.0f, GameScene::scene(), cocos2d::Color3B::WHITE)
+			//cocos2d::TransitionCrossFade::create(2.0f, GameScene::scene())
 			);
-	
+		sound.BGMStop();
 	}
 }

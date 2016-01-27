@@ -5,15 +5,20 @@ Player::Player()
 {
 	texture = cocos2d::Sprite::create("Texture/Rocket.png");
 	_pos = cocos2d::Vec2(0, 0);
-	auto keylistener = cocos2d::EventListenerKeyboard::create();
-	keylistener->onKeyPressed = CC_CALLBACK_2(Player::onKeyPressed, this);
-	//cocos2d::Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(keylistener, 1);
 }
 
 
 Player::~Player()
 {
 }
+
+void Player::KeyInit(cocos2d::EventDispatcher* dispatcher, cocos2d::Node* node)
+{
+	keylistener = cocos2d::EventListenerKeyboard::create();
+	keylistener->onKeyPressed = CC_CALLBACK_2(Player::onKeyPressed, this);
+	dispatcher->addEventListenerWithSceneGraphPriority(keylistener, node);
+}
+
 
 void Player::Update()
 {

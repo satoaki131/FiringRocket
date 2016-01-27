@@ -3,6 +3,8 @@
 
 #include "cocos2d.h"
 #include "Manager/Sound.h"
+#include "Object/Player.h"
+
 class Title : public cocos2d::Layer
 {
 private:
@@ -10,6 +12,10 @@ private:
 	float label_angle;
 	cocos2d::Vec2 background_pos;
 	Sound sound;
+	cocos2d::Size visibleSize;
+	cocos2d::Vec2 origin;
+
+	Player player;
 	
 public:
 	virtual bool init();

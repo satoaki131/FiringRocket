@@ -2,7 +2,6 @@
 #include "Scene/GameScene.h"
 #include <base/CCEvent.h>
 #include "SimpleAudioEngine.h"
-#include "Object/Player.h"
 
 cocos2d::Scene* Title::scene()
 {
@@ -40,9 +39,9 @@ bool Title::init()
 	sound.BGMPlay(true);
 	
 	//ウィンドウサイズ所得
-	cocos2d::Size visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
+	visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
 	//原点所得
-	cocos2d::Vec2 origin = cocos2d::Director::getInstance()->getVisibleOrigin();
+	origin = cocos2d::Director::getInstance()->getVisibleOrigin();
 
 	background_pos = cocos2d::Vec2(visibleSize.width / 2 + origin.x + background_pos.x, visibleSize.height / 2 + origin.y + background_pos.y);
 
@@ -61,7 +60,7 @@ bool Title::init()
 	auto background = cocos2d::Sprite::create("Texture/BackGround.png");
 	background->setPosition(background_pos);
 	
-	Player player;
+	player.KeyInit(dispatcher, this);
 	player.setPos(visibleSize, origin);
 	//上から順に描画されていく
 	this->addChild(background, 1);
@@ -81,7 +80,8 @@ void Title::update(float delta)
 	start_label->setPosition(label_pos);
 	label_angle += 0.1f;
 	label_pos.y += std::sin(label_angle);
-
+	player.setPos(visibleSize, origin);
+	
 }
 
 void Title::onMouseDown(cocos2d::Event* event)

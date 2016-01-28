@@ -8,6 +8,10 @@ Player::Player()
 	_angle = 0.0f;
 	_keyPressed[LEFT] = false;
 	_keyPressed[RIGHT] = false;
+	_movepos = cocos2d::Vec2(_pos.x + (20 * std::cos(_angle + 90)), _pos.y + (20 * std::sin(_angle + 90))); 
+	_moveamount = _movepos - _pos;
+	l = sqrt((_moveamount.x * _moveamount.x) + (_moveamount.y * _moveamount.y));
+	_normal_pos = _moveamount / l;
 }
 
 
@@ -37,6 +41,10 @@ void Player::Update(cocos2d::Vec2 window_size, cocos2d::Vec2 origin)
 void Player::setPos(cocos2d::Vec2 window_size, cocos2d::Vec2 origin)
 {
 	_texture->setPosition(window_size.x / 2 + origin.x + _pos.x, window_size.y / 2 + origin.y + _pos.y);
+	_movepos = cocos2d::Vec2(_pos.x + (20 * std::cos(_angle + 90)), _pos.y + (20 * std::sin(_angle + 90)));
+	_moveamount = _movepos - _pos;
+	l = sqrt((_moveamount.x * _moveamount.x) + (_moveamount.y * _moveamount.y));
+	_normal_pos = _moveamount / l;
 	//_pos.y -= 0.5f;
 }
 
@@ -89,7 +97,7 @@ void Player::MoveAction()
 
 	if (_keyPressed[LEFT] && _keyPressed[RIGHT])
 	{
-		_pos.y += 0.5f;
+		_pos += _normal_pos;
 	}
 	else if (!_keyPressed[LEFT] && !_keyPressed[RIGHT])
 	{

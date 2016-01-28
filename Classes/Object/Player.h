@@ -12,9 +12,13 @@ class Player
 {
 	static const int Key = 2;
 	cocos2d::Vec2 _pos;
+	cocos2d::Vec2 _movepos;
+	cocos2d::Vec2 _moveamount; //ˆÚ“®—Ê
 	float _angle;
 	cocos2d::Sprite* _texture;
 	bool _keyPressed[Key];
+	float l;
+	cocos2d::Vec2 _normal_pos;
 
 public:
 	cocos2d::EventListenerKeyboard* keylistener;

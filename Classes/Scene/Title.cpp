@@ -30,7 +30,7 @@ bool Title::init()
 	auto keylistener = cocos2d::EventListenerKeyboard::create();
 	keylistener->onKeyPressed = CC_CALLBACK_2(Title::onKeyPressed, this);
 	dispatcher->addEventListenerWithSceneGraphPriority(keylistener, this);
-
+	
 	//サウンド関連
 	//あらかじめ読み込んでおいたほうが良い(やらなくてもいけるが、サイズによっては処理が遅くなるため、やっておいたほうが良い)
 	//CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadBackgroundMusic("Sound/titleBGM.mp3");
@@ -73,7 +73,7 @@ bool Title::init()
 	this->addChild(title_label, 1);
 	this->addChild(start_label, 1);
 	this->addChild(player.getPlayerTexture(), 1);
-	this->addChild(point, 1);
+	
 
 	this->scheduleUpdate();
 
@@ -88,7 +88,6 @@ void Title::update(float delta)
 	label_angle += 0.1f;
 	label_pos.y += std::sin(label_angle);
 	player.Update(visibleSize, origin);
-	
 }
 
 void Title::onMouseDown(cocos2d::Event* event)
@@ -114,4 +113,5 @@ void Title::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event
 			);
 		sound.BGMStop();
 	}
+	
 }

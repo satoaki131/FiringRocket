@@ -20,6 +20,7 @@ bool Title::init()
 	//ディレクタクラス所得
 	auto dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
 	
+	
 	//マウス関連
 	//auto mouselistener = cocos2d::EventListenerMouse::create();
 	//mouselistener->onMouseDown = CC_CALLBACK_1(Title::onMouseDown, this);
@@ -45,6 +46,10 @@ bool Title::init()
 
 	background_pos = cocos2d::Vec2(visibleSize.width / 2 + origin.x + background_pos.x, visibleSize.height / 2 + origin.y + background_pos.y);
 
+	//点の描画
+	//auto point = cocos2d::DrawNode::create();
+	//point->drawDot(cocos2d::Vec2(visibleSize / 2), 1.0f, cocos2d::Color4F(1.0f, 1.0f, 1.0f, 1.0f));
+
 	//文字表示(文字, Font, FontSize)
 	auto title_label = cocos2d::Label::createWithTTF("Firing Rocket", "fonts/JKG-M_3.ttf", 65);
 	title_label->setColor(cocos2d::Color3B::ORANGE);
@@ -57,6 +62,7 @@ bool Title::init()
 	start_label->setPosition(label_pos);
 	start_label->setTag(2);
 
+	
 	auto background = cocos2d::Sprite::create("Texture/BackGround.png");
 	background->setPosition(background_pos);
 	
@@ -66,7 +72,8 @@ bool Title::init()
 	this->addChild(background, 1);
 	this->addChild(title_label, 1);
 	this->addChild(start_label, 1);
-	this->addChild(player.texture, 1);
+	this->addChild(player.getPlayerTexture(), 1);
+	this->addChild(point, 1);
 
 	this->scheduleUpdate();
 
@@ -80,7 +87,7 @@ void Title::update(float delta)
 	start_label->setPosition(label_pos);
 	label_angle += 0.1f;
 	label_pos.y += std::sin(label_angle);
-	player.setPos(visibleSize, origin);
+	player.Update(visibleSize, origin);
 	
 }
 

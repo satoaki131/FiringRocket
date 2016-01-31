@@ -33,6 +33,7 @@ public:
 	void setRot();
 	cocos2d::Sprite* getPlayerTexture();
 	void MoveAction();
+	cocos2d::ParticleSystemQuad* _fire;
 
 };
 

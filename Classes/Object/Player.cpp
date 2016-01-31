@@ -31,6 +31,9 @@ void Player::Init(cocos2d::EventDispatcher* dispatcher, cocos2d::Node* node, coc
 	dispatcher->addEventListenerWithSceneGraphPriority(keylistener, node);
 
 	_texture->setScale(0.4f);
+	_fire = cocos2d::ParticleSystemQuad::create("Particle/particle_texture.plist");
+	_fire->resetSystem();
+	_fire->setAutoRemoveOnFinish(true);
 }
 
 
@@ -47,12 +50,13 @@ void Player::setPos()
 	_movepos = cocos2d::Vec2(_pos.x + (20 * std::cos(_rad + (M_PI / 2))), _pos.y + (20 * std::sin(_rad + (M_PI / 2))));
 	_moveamount = _movepos - _pos;
 	_texture->setPosition(_pos);
-
+	_fire->setPosition(_pos + cocos2d::Vec2(-25, -50));
 }
 
 void Player::setRot()
 {
 	_texture->setRotation(-_angle);
+	_fire->setRotation(-_angle);
 }
 
 

@@ -41,23 +41,20 @@ bool Title::init()
 	
 	//ウィンドウサイズ所得
 	visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
-	//原点所得
-	origin = cocos2d::Director::getInstance()->getVisibleOrigin();
+	////原点所得
+	//origin = cocos2d::Director::getInstance()->getVisibleOrigin();
 
-	background_pos = cocos2d::Vec2(visibleSize.width / 2 + origin.x + background_pos.x, visibleSize.height / 2 + origin.y + background_pos.y);
+	background_pos = cocos2d::Vec2(visibleSize.width / 2 + background_pos.x, visibleSize.height / 2 + background_pos.y);
 
-	//点の描画
-	//auto point = cocos2d::DrawNode::create();
-	//point->drawDot(cocos2d::Vec2(visibleSize / 2), 1.0f, cocos2d::Color4F(1.0f, 1.0f, 1.0f, 1.0f));
-
+	
 	//文字表示(文字, Font, FontSize)
 	auto title_label = cocos2d::Label::createWithTTF("Firing Rocket", "fonts/JKG-M_3.ttf", 65);
 	title_label->setColor(cocos2d::Color3B::ORANGE);
-	title_label->setPosition(cocos2d::Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 2 + title_label->getContentSize().height));
+	title_label->setPosition(cocos2d::Vec2(visibleSize.width / 2, visibleSize.height / 2 + title_label->getContentSize().height));
 
 	auto start_label = cocos2d::Label::createWithTTF("Enter to Start", "fonts/JKG-M_3.ttf", 30);
 	start_label->setColor(cocos2d::Color3B::MAGENTA);
-	label_pos = cocos2d::Vec2(origin.x + visibleSize.width / 2 + label_pos.x, origin.y + visibleSize.height / 2 + title_label->getContentSize().height + label_pos.y - 150);
+	label_pos = cocos2d::Vec2(visibleSize.width / 2 + label_pos.x, visibleSize.height / 2 + title_label->getContentSize().height + label_pos.y - 150);
 	label_angle = 0.1f;
 	start_label->setPosition(label_pos);
 	start_label->setTag(2);
@@ -66,14 +63,24 @@ bool Title::init()
 	auto background = cocos2d::Sprite::create("Texture/BackGround.png");
 	background->setPosition(background_pos);
 	
-	player.KeyInit(dispatcher, this);
-	player.setPos(visibleSize, origin);
+	player.Init(dispatcher, this, visibleSize);
+
+	//点の描画
+	//auto point1 = cocos2d::DrawNode::create();
+	//point1->drawDot(cocos2d::Vec2(0, 0), 5.0f, cocos2d::Color4F(1.0f, 1.0f, 1.0f, 1.0f));
+	//point1->setTag(5);
+
+	//auto point2 = cocos2d::DrawNode::create();
+	//point2->drawDot(cocos2d::Vec2(0, 0), 5.0f, cocos2d::Color4F(1.0f, 0.0f, 1.0f, 1.0f));
+	//point2->setTag(6);
+
 	//上から順に描画されていく
 	this->addChild(background, 1);
 	this->addChild(title_label, 1);
 	this->addChild(start_label, 1);
 	this->addChild(player.getPlayerTexture(), 1);
-	
+	//this->addChild(point1, 1);
+	//this->addChild(point2, 1);
 
 	this->scheduleUpdate();
 
@@ -87,7 +94,13 @@ void Title::update(float delta)
 	start_label->setPosition(label_pos);
 	label_angle += 0.1f;
 	label_pos.y += std::sin(label_angle);
-	player.Update(visibleSize, origin);
+	player.Update();
+
+	//auto point1 = this->getChildByTag(5);
+	//point1->setPosition(player._pos);
+
+	//auto point2 = this->getChildByTag(6);
+	//point2->setPosition(player._movepos);
 }
 
 void Title::onMouseDown(cocos2d::Event* event)

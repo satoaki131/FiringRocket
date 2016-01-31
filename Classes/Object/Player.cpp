@@ -6,12 +6,12 @@ Player::Player()
 	_texture = cocos2d::Sprite::create("Texture/Rocket.png");
 	_pos = cocos2d::Vec2(0, 0);
 	_angle = 0.0f;
+	_rad = _angle * (M_PI / 180);
 	_keyPressed[LEFT] = false;
 	_keyPressed[RIGHT] = false;
-	_movepos = cocos2d::Vec2(_pos.x + (20 * std::cos(_angle + 90)), _pos.y + (20 * std::sin(_angle + 90))); 
+	_movepos = cocos2d::Vec2(_pos.x + (20 * std::cos(_rad + (M_PI / 180))), _pos.y + (20 * std::sin(_rad + (M_PI / 180)))); 
 	_moveamount = _movepos - _pos;
-	l = sqrt((_moveamount.x * _moveamount.x) + (_moveamount.y * _moveamount.y));
-	_normal_pos = _moveamount / l;
+	_movespeed = 0.1f;
 }
 
 
@@ -21,36 +21,38 @@ Player::~Player()
 
 cocos2d::Sprite* Player::getPlayerTexture(){ return _texture; }
 
-void Player::KeyInit(cocos2d::EventDispatcher* dispatcher, cocos2d::Node* node)
+void Player::Init(cocos2d::EventDispatcher* dispatcher, cocos2d::Node* node, cocos2d::Size window_size)
 {
+	_pos = cocos2d::Vec2(window_size.width / 2, window_size.height / 2);
+
 	keylistener = cocos2d::EventListenerKeyboard::create();
 	keylistener->onKeyPressed = CC_CALLBACK_2(Player::onKeyPressed, this);
 	keylistener->onKeyReleased = CC_CALLBACK_2(Player::onKeyRereased, this);
 	dispatcher->addEventListenerWithSceneGraphPriority(keylistener, node);
+
+	_texture->setScale(0.4f);
 }
 
 
-void Player::Update(cocos2d::Vec2 window_size, cocos2d::Vec2 origin)
+void Player::Update()
 {
-	setPos(window_size, origin);
+	setPos();
 	setRot();
 	MoveAction();
 }
 
 
-void Player::setPos(cocos2d::Vec2 window_size, cocos2d::Vec2 origin)
+void Player::setPos()
 {
-	_texture->setPosition(window_size.x / 2 + origin.x + _pos.x, window_size.y / 2 + origin.y + _pos.y);
-	_movepos = cocos2d::Vec2(_pos.x + (20 * std::cos(_angle + 90)), _pos.y + (20 * std::sin(_angle + 90)));
+	_movepos = cocos2d::Vec2(_pos.x + (20 * std::cos(_rad + (M_PI / 2))), _pos.y + (20 * std::sin(_rad + (M_PI / 2))));
 	_moveamount = _movepos - _pos;
-	l = sqrt((_moveamount.x * _moveamount.x) + (_moveamount.y * _moveamount.y));
-	_normal_pos = _moveamount / l;
-	//_pos.y -= 0.5f;
+	_texture->setPosition(_pos);
+
 }
 
 void Player::setRot()
 {
-	_texture->setRotation(_angle);
+	_texture->setRotation(-_angle);
 }
 
 
@@ -88,16 +90,20 @@ void Player::MoveAction()
 	if (_keyPressed[LEFT])
 	{
 		_angle -= 1.0f;
+		_rad = _angle * (M_PI / 180);
+		_pos += _moveamount * _movespeed;
 	}
 
 	if (_keyPressed[RIGHT])
 	{
 		_angle += 1.0f;
+		_rad = _angle * (M_PI / 180);
+		_pos += _moveamount * _movespeed;
 	}
 
 	if (_keyPressed[LEFT] && _keyPressed[RIGHT])
 	{
-		_pos += _normal_pos;
+		_pos -= _moveamount * _movespeed;
 	}
 	else if (!_keyPressed[LEFT] && !_keyPressed[RIGHT])
 	{

@@ -13,7 +13,7 @@ private:
 	cocos2d::Vec2 background_pos;
 	Sound sound;
 	cocos2d::Size visibleSize;
-	cocos2d::Vec2 origin;
+	//cocos2d::Vec2 origin;
 	Player player;
 public:
 	virtual bool init();

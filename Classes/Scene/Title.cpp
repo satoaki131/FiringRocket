@@ -80,6 +80,7 @@ bool Title::init()
 	this->addChild(start_label, 1);
 	this->addChild(player.getPlayerTexture(), 1);
 	this->addChild(player._fire, 1);
+	this->addChild(player._fire2, 1);
 	//this->addChild(point1, 1);
 	//this->addChild(point2, 1);
 
@@ -101,7 +102,7 @@ void Title::update(float delta)
 	//point1->setPosition(player._pos);
 
 	//auto point2 = this->getChildByTag(6);
-	//point2->setPosition(player._movepos);
+	//point2->setPosition(player._fire_pos);
 }
 
 void Title::onMouseDown(cocos2d::Event* event)

@@ -19,8 +19,13 @@ class Player
 	cocos2d::Vec2 _movepos;
 	cocos2d::Vec2 _moveamount; //ˆÚ“®—Ê
 	float _movespeed;
-
+	cocos2d::Vec2 _fire_pos;
+	float _fire_angle;
+	float _fire_rad;
+	cocos2d::Vec2 _fire_move;
+	
 public:
+
 	cocos2d::EventListenerKeyboard* keylistener;
 	Player();
 	~Player();
@@ -34,6 +39,7 @@ public:
 	cocos2d::Sprite* getPlayerTexture();
 	void MoveAction();
 	cocos2d::ParticleSystemQuad* _fire;
+	cocos2d::ParticleSystemQuad* _fire2;
 
 };
 

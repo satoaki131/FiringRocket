@@ -23,7 +23,10 @@ class Player
 	float _fire_angle;
 	float _fire_rad;
 	cocos2d::Vec2 _fire_move;
-	
+	cocos2d::Vec2 _fire_pos2;
+	float _fire_rad2;
+	float _fire_angle2;
+	cocos2d::Vec2 _fire_move2;
 public:
 
 	cocos2d::EventListenerKeyboard* keylistener;

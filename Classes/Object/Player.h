@@ -19,14 +19,10 @@ class Player
 	cocos2d::Vec2 _movepos;
 	cocos2d::Vec2 _moveamount; //ˆÚ“®—Ê
 	float _movespeed;
-	cocos2d::Vec2 _fire_pos;
-	float _fire_angle;
-	float _fire_rad;
-	cocos2d::Vec2 _fire_move;
-	cocos2d::Vec2 _fire_pos2;
-	float _fire_rad2;
-	float _fire_angle2;
-	cocos2d::Vec2 _fire_move2;
+	cocos2d::Vec2 _fire_pos[2];
+	float _fire_angle[2];
+	float _fire_rad[2];
+	cocos2d::Vec2 _fire_move[2];
 public:
 
 	cocos2d::EventListenerKeyboard* keylistener;
@@ -41,8 +37,7 @@ public:
 	void setRot();
 	cocos2d::Sprite* getPlayerTexture();
 	void MoveAction();
-	cocos2d::ParticleSystemQuad* _fire;
-	cocos2d::ParticleSystemQuad* _fire2;
+	cocos2d::ParticleSystemQuad* _fire[2];
 
 };
 

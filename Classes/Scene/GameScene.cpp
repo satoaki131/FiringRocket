@@ -1,13 +1,11 @@
 #include "Scene/GameScene.h"
 
-using namespace cocos2d;
-
-Scene* GameScene::scene()
+cocos2d::Scene* GameScene::scene()
 {
-	auto scene = Scene::create();
+	auto scene = cocos2d::Scene::create();
 	auto layer = GameScene::create();
 	scene->addChild(layer);
-
+	
 	return scene;
 }
 
@@ -17,8 +15,24 @@ bool GameScene::init()
 	{
 		return false;
 	}
+	//ディレクタクラス所得
+	auto dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
 
+	//キーボード関連
+	auto keylistener = cocos2d::EventListenerKeyboard::create();
+	keylistener->onKeyPressed = CC_CALLBACK_2(GameScene::onKeyPressed, this);
+	dispatcher->addEventListenerWithSceneGraphPriority(keylistener, this);
+	
+
+	//ウィンドウサイズ所得
+	visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
+
+	player.Init(dispatcher, this, visibleSize);
 	this->scheduleUpdate();
+
+	this->addChild(player._fire[LEFT], 1);
+	this->addChild(player._fire[RIGHT], 1);
+	this->addChild(player.getPlayerTexture(), 1);
 	
 	return true;
 }
@@ -26,5 +40,13 @@ bool GameScene::init()
 
 void GameScene::update(float delta)
 {
-	
+	player.Update();
+}
+
+void GameScene::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
+{
+	if (keyCode == cocos2d::EventKeyboard::KeyCode::KEY_ENTER)
+	{
+		cocos2d::Director::getInstance()->pushScene(Pause::scene());
+	}
 }

@@ -1,4 +1,5 @@
 #include "Scene/GameScene.h"
+#include "Scene/Result.h"
 
 cocos2d::Scene* GameScene::scene()
 {
@@ -48,6 +49,7 @@ void GameScene::update(float delta)
 	_score = Score::Update();
 	this->addChild(_score);
 	Collision();
+	BackGroundMove();
 }
 
 void GameScene::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
@@ -61,6 +63,28 @@ void GameScene::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::E
 
 void GameScene::Collision()
 {
+	//playerのポジション所得
+	auto pos = player.getPos();
 	
+	//画面外にいったらゲームオーバー
+	if (pos.y > visibleSize.height + 50)
+	{
+		this->unscheduleUpdate();
+		cocos2d::Director::getInstance()->replaceScene(
+			cocos2d::TransitionFade::create(2.0f, Result::scene(), cocos2d::Color3B::RED)
+			);
+	}
+	else if (pos.y < -50)
+	{
+		this->unscheduleUpdate();
+		cocos2d::Director::getInstance()->replaceScene(
+			cocos2d::TransitionFade::create(2.0f, Result::scene(), cocos2d::Color3B::RED)
+			);
+	}
+}
+
+void GameScene::BackGroundMove()
+{
+
 }
 

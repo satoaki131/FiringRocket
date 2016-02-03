@@ -19,6 +19,7 @@ public:
 	virtual void update(float delta);
 	virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 	void Collision();
+	void BackGroundMove();
 	CREATE_FUNC(GameScene);
 
 };

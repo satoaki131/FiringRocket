@@ -7,9 +7,9 @@ class Result : public cocos2d::Layer
 {
 private:
 public:
-	cocos2d::Scene* scene();
+	static cocos2d::Scene* scene();
 	virtual bool init();
-
+	virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 	CREATE_FUNC(Result);
 };
 

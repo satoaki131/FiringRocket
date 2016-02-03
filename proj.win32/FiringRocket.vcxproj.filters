@@ -42,6 +42,9 @@
     <ClCompile Include="..\Classes\Scene\Pause.cpp">
       <Filter>src\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Manager\Score.cpp">
+      <Filter>src\Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -64,6 +67,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Scene\Pause.h">
       <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Manager\Score.h">
+      <Filter>src\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

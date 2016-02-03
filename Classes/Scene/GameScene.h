@@ -4,12 +4,14 @@
 #include "cocos2d.h"
 #include "Object/Player.h"
 #include "Scene/Pause.h"
+#include "Manager/Score.h"
 
 class GameScene : public cocos2d::Layer
 {
 private:
 	cocos2d::Size visibleSize;
 	Player player;
+	cocos2d::Label* _score;
 public:
 	virtual bool init();
 	static cocos2d::Scene* scene();

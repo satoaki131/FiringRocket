@@ -27,13 +27,16 @@ bool GameScene::init()
 	//ウィンドウサイズ所得
 	visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
 
+	auto label = Score::Init();
 	player.Init(dispatcher, this, visibleSize);
 	this->scheduleUpdate();
 
 	this->addChild(player._fire[LEFT], 1);
 	this->addChild(player._fire[RIGHT], 1);
 	this->addChild(player.getPlayerTexture(), 1);
-	
+	this->addChild(label, 1);
+	_score = Score::Update();
+	this->addChild(_score, 1);
 	return true;
 }
 
@@ -41,6 +44,9 @@ bool GameScene::init()
 void GameScene::update(float delta)
 {
 	player.Update();
+	this->removeChild(_score);
+	_score = Score::Update();
+	this->addChild(_score);
 }
 
 void GameScene::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)

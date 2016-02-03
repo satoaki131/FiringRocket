@@ -47,6 +47,7 @@ void GameScene::update(float delta)
 	this->removeChild(_score);
 	_score = Score::Update();
 	this->addChild(_score);
+	Collision();
 }
 
 void GameScene::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
@@ -56,3 +57,10 @@ void GameScene::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::E
 		cocos2d::Director::getInstance()->pushScene(Pause::scene());
 	}
 }
+
+
+void GameScene::Collision()
+{
+	
+}
+

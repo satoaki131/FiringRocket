@@ -10,14 +10,15 @@ class GameScene : public cocos2d::Layer
 {
 private:
 	cocos2d::Size visibleSize;
-	Player player;
 	cocos2d::Label* _score;
+	Player player;
 public:
 	virtual bool init();
 	static cocos2d::Scene* scene();
-	
+
 	virtual void update(float delta);
 	virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
+	void Collision();
 	CREATE_FUNC(GameScene);
 
 };

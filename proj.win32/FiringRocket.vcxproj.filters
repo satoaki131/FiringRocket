@@ -45,6 +45,9 @@
     <ClCompile Include="..\Classes\Manager\Score.cpp">
       <Filter>src\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Scene\Result.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -70,6 +73,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Manager\Score.h">
       <Filter>src\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scene\Result.h">
+      <Filter>src\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

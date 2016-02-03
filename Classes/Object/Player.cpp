@@ -22,6 +22,7 @@ Player::Player()
 	_fire_pos[RIGHT] = cocos2d::Vec2(_pos.x + (_fire_move[RIGHT].x * std::cos(_fire_rad[RIGHT])), _pos.y + (_fire_move[RIGHT].y * std::sin(_fire_rad[RIGHT])));
 	_fire_angle[RIGHT] = 83.0f;
 	_fire_rad[RIGHT] = _fire_angle[RIGHT] * (M_PI / 180);
+	_visiblesize = cocos2d::Director::getInstance()->getVisibleSize();
 }
 
 
@@ -84,6 +85,7 @@ void Player::setRot()
 	_texture->setRotation(-_angle);
 }
 
+cocos2d::Vec2 Player::getPos(){	return _pos; }
 
 void Player::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
@@ -150,6 +152,15 @@ void Player::MoveAction()
 	if (!_keyPressed[LEFT] && !_keyPressed[RIGHT])
 	{
 		_pos.y -= 0.5f;
+	}
+
+	if (_pos.x > _visiblesize.width + 50)
+	{
+		_pos.x = -50;
+	}
+	else if(_pos.x < -50)
+	{
+		_pos.x = _visiblesize.width + 50;
 	}
 }
 

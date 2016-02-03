@@ -63,7 +63,7 @@ bool Title::init()
 	auto background = cocos2d::Sprite::create("Texture/BackGround.png");
 	background->setPosition(background_pos);
 	
-	player.Init(dispatcher, this, visibleSize);
+	//player.Init(dispatcher, this, visibleSize);
 
 	//“_‚Ì•`‰æ
 	//auto point1 = cocos2d::DrawNode::create();
@@ -78,9 +78,9 @@ bool Title::init()
 	this->addChild(background, 1);
 	this->addChild(title_label, 1);
 	this->addChild(start_label, 1);
-	this->addChild(player._fire[LEFT], 1);
-	this->addChild(player._fire[RIGHT], 1);
-	this->addChild(player.getPlayerTexture(), 1);
+	//this->addChild(player._fire[LEFT], 1);
+	//this->addChild(player._fire[RIGHT], 1);
+	//this->addChild(player.getPlayerTexture(), 1);
 	//this->addChild(point1, 1);
 	//this->addChild(point2, 1);
 
@@ -96,7 +96,7 @@ void Title::update(float delta)
 	start_label->setPosition(label_pos);
 	label_angle += 0.1f;
 	label_pos.y += std::sin(label_angle);
-	player.Update();
+	//player.Update();
 
 	//auto point1 = this->getChildByTag(5);
 	//point1->setPosition(player._pos);

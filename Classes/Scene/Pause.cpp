@@ -1,5 +1,6 @@
 #include "Scene/Pause.h"
 #include "Scene/GameScene.h"
+#include "Manager/Score.h"
 cocos2d::Scene* Pause::scene()
 {
 	auto scene = cocos2d::Scene::create();
@@ -24,8 +25,16 @@ bool Pause::init()
 
 	auto font = cocos2d::Label::createWithTTF("Pause", "fonts/JKG-M_3.ttf", 50);
 	font->setColor(cocos2d::Color3B::YELLOW);
-	font->setPosition(cocos2d::Vec2(visibleSize.width, visibleSize.height));
+	font->setPosition(cocos2d::Vec2(visibleSize.width/2, visibleSize.height/2 + 100));
+	
+	auto score = Score::PauseScore();
+	score->setPosition(cocos2d::Vec2(visibleSize.width / 2 + 50, visibleSize.height / 2));
+	auto score_font = Score::Init();
+	score_font->setPosition(cocos2d::Vec2(visibleSize.width / 2 - 50, visibleSize.height / 2));
 
+	this->addChild(score_font, 1);
+	this->addChild(font, 1);
+	this->addChild(score, 1);
 	return true;
 }
 

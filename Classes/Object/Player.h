@@ -23,6 +23,7 @@ class Player
 	float _fire_angle[2];
 	float _fire_rad[2];
 	cocos2d::Vec2 _fire_move[2];
+	cocos2d::Size _visiblesize;
 public:
 
 	cocos2d::EventListenerKeyboard* keylistener;
@@ -35,6 +36,7 @@ public:
 	void onKeyRereased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 	void setPos();
 	void setRot();
+	cocos2d::Vec2 getPos();
 	cocos2d::Sprite* getPlayerTexture();
 	void MoveAction();
 	cocos2d::ParticleSystemQuad* _fire[2];

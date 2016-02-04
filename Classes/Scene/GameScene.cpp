@@ -43,6 +43,7 @@ bool GameScene::init()
 	this->addChild(label, 1);
 	_score = Score::Update(30);
 	this->addChild(_score, 1);
+
 	return true;
 }
 
@@ -50,6 +51,16 @@ bool GameScene::init()
 void GameScene::update(float delta)
 {
 	player.Update();
+	enemy_ufo.Update();
+	//if (enemy_ufo.ActiveCheck() && !enemy_ufo.)
+	//{
+	//	this->addChild(enemy_ufo.getUFOTexture(), 1);
+	//}
+	//if (!enemy_ufo.ActiveCheck())
+	//{
+	//	this->removeChild(enemy_ufo.getUFOTexture(), 1);
+	//}
+
 	this->removeChild(_score);
 	_score = Score::Update(30);
 	this->addChild(_score);

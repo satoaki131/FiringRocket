@@ -5,6 +5,7 @@
 #include "Object/Player.h"
 #include "Scene/Pause.h"
 #include "Manager/Score.h"
+#include "Object/Enemy_UFO.h"
 
 class GameScene : public cocos2d::Layer
 {
@@ -13,6 +14,7 @@ private:
 	cocos2d::Label* _score;
 	Player player;
 	cocos2d::Sprite* _background;
+	Enemy_UFO enemy_ufo;
 public:
 	virtual bool init();
 	static cocos2d::Scene* scene();

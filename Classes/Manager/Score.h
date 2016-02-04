@@ -11,9 +11,10 @@ private:
 	static std::string _text;
 public:
 	static void HighscoreUpdate(int &score);
-	static cocos2d::Label* Update();
-	static cocos2d::Label* Init();
-	static cocos2d::Label* PauseScore();
+	static cocos2d::Label* Update(int size);
+	static cocos2d::Label* Init(int size);
+	static cocos2d::Label* DisplayScore(int size);
+	static void ResetScore();
 };
 
 #endif // !__SCORE_H__

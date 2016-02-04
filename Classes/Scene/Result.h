@@ -6,6 +6,7 @@
 class Result : public cocos2d::Layer
 {
 private:
+	cocos2d::Size visiblesize;
 public:
 	static cocos2d::Scene* scene();
 	virtual bool init();

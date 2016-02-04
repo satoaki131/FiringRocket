@@ -28,7 +28,12 @@ bool GameScene::init()
 	//ウィンドウサイズ所得
 	visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
 
-	auto label = Score::Init();
+	_background = cocos2d::Sprite::create("Texture/MainBackGround.png");
+	_background->setPosition(visibleSize / 2);
+	_background->setScaleY(1.5f);
+	this->addChild(_background);
+
+	auto label = Score::Init(30);
 	player.Init(dispatcher, this, visibleSize);
 	this->scheduleUpdate();
 
@@ -36,7 +41,7 @@ bool GameScene::init()
 	this->addChild(player._fire[RIGHT], 1);
 	this->addChild(player.getPlayerTexture(), 1);
 	this->addChild(label, 1);
-	_score = Score::Update();
+	_score = Score::Update(30);
 	this->addChild(_score, 1);
 	return true;
 }
@@ -46,7 +51,7 @@ void GameScene::update(float delta)
 {
 	player.Update();
 	this->removeChild(_score);
-	_score = Score::Update();
+	_score = Score::Update(30);
 	this->addChild(_score);
 	Collision();
 	BackGroundMove();

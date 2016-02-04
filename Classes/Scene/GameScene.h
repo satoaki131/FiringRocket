@@ -12,6 +12,7 @@ private:
 	cocos2d::Size visibleSize;
 	cocos2d::Label* _score;
 	Player player;
+	cocos2d::Sprite* _background;
 public:
 	virtual bool init();
 	static cocos2d::Scene* scene();

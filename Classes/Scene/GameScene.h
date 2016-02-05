@@ -13,8 +13,9 @@ private:
 	cocos2d::Size visibleSize;
 	cocos2d::Label* _score;
 	Player player;
-	cocos2d::Sprite* _background;
 	Enemy_UFO enemy_ufo;
+	std::vector<cocos2d::DrawNode*> _background;
+	std::vector<cocos2d::Vec2> _backgroundpos;
 public:
 	virtual bool init();
 	static cocos2d::Scene* scene();

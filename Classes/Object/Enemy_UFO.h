@@ -19,7 +19,7 @@ private:
 	int _repeat_time;
 	int _randomPoint;
 	int _mode;
-	bool _drawTexture;
+	cocos2d::Size visibleSize;
 public:
 
 	void Update();
@@ -30,7 +30,6 @@ public:
 	cocos2d::Sprite* getUFOTexture();
 	bool ActiveCheck();
 	int TimeCheck();
-	//bool setdrawTexture(bool &active);
 };
 
 #endif // !__ENEMY_UFO_H__

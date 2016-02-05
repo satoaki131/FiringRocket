@@ -28,14 +28,20 @@ bool GameScene::init()
 	//ウィンドウサイズ所得
 	visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
 
-	_background = cocos2d::Sprite::create("Texture/MainBackGround.png");
-	_background->setPosition(visibleSize / 2);
-	_background->setScaleY(1.5f);
-	this->addChild(_background);
+	//背景関連
+	for (int i = 0; i < 200; i++)
+	{
+		_background.push_back(cocos2d::DrawNode::create());
+		_backgroundpos.push_back(cocos2d::Vec2(cocos2d::random(0.0f, visibleSize.width), cocos2d::random(0.0f, visibleSize.height)));
+		_background[i]->drawDot(_backgroundpos[i], cocos2d::random(0.1f, 0.8f), cocos2d::Color4F::WHITE);
+		this->addChild(_background[i], 1);
+	}
 
 	auto label = Score::Init(30);
 	player.Init(dispatcher, this, visibleSize);
 	this->scheduleUpdate();
+
+	this->addChild(enemy_ufo.getUFOTexture(), 1);
 
 	this->addChild(player._fire[LEFT], 1);
 	this->addChild(player._fire[RIGHT], 1);
@@ -43,6 +49,7 @@ bool GameScene::init()
 	this->addChild(label, 1);
 	_score = Score::Update(30);
 	this->addChild(_score, 1);
+	
 
 	return true;
 }
@@ -52,15 +59,6 @@ void GameScene::update(float delta)
 {
 	player.Update();
 	enemy_ufo.Update();
-	//if (enemy_ufo.ActiveCheck() && !enemy_ufo.)
-	//{
-	//	this->addChild(enemy_ufo.getUFOTexture(), 1);
-	//}
-	//if (!enemy_ufo.ActiveCheck())
-	//{
-	//	this->removeChild(enemy_ufo.getUFOTexture(), 1);
-	//}
-
 	this->removeChild(_score);
 	_score = Score::Update(30);
 	this->addChild(_score);
@@ -101,6 +99,14 @@ void GameScene::Collision()
 
 void GameScene::BackGroundMove()
 {
-
+	for (int i = 0; i < _background.size(); i++)
+	{
+		_backgroundpos[i].y -= 0.5f;
+		if (_backgroundpos[i].y < -visibleSize.height / 2)
+		{
+			_backgroundpos[i].y = visibleSize.height;
+		}
+		_background[i]->setPosition(_backgroundpos[i]);
+	}
 }
 

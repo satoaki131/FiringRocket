@@ -17,6 +17,8 @@ public:
 	void BGMStop();
 	
 	void EffectInit(char* path);
+	void EffectPlay(bool loop);
+	void EffectStop();
 	
 };
 

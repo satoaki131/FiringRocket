@@ -7,7 +7,7 @@ std::string Score::_text = "Score : ";
 void Score::HighscoreUpdate(int &score)
 {
 	if (score > _highscore)
-	{
+	{		
 		_highscore = score;
 	}
 }

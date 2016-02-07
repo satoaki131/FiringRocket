@@ -1,5 +1,6 @@
 #include "Scene/GameScene.h"
 #include "Scene/Result.h"
+#include "Manager/Hit.h"
 
 cocos2d::Scene* GameScene::scene()
 {
@@ -95,6 +96,7 @@ void GameScene::Collision()
 			cocos2d::TransitionFade::create(2.0f, Result::scene(), cocos2d::Color3B::RED)
 			);
 	}
+
 }
 
 void GameScene::BackGroundMove()

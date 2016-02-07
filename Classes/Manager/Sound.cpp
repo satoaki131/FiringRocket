@@ -52,5 +52,24 @@ void Sound::EffectInit(char* path)
 }
 
 
+void Sound::EffectPlay(bool loop)
+{
+	if (file_path == nullptr)return;
+	if (loop)
+	{
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(file_path, true);
+	}
+	else
+	{
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(file_path, false);
+	}
+}
+
+
+void Sound::EffectStop()
+{
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopEffect(true);
+}
+
 
 

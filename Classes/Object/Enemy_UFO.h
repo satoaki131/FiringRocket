@@ -35,7 +35,8 @@ public:
 	void Action(cocos2d::Vec2 Player_pos);
 	cocos2d::Sprite* getUFOTexture();
 	bool ActiveCheck();
-	cocos2d::Vec2 getPos();
+	cocos2d::Vec2 getEnemyPos();
+	cocos2d::Vec2 getLazerPos();
 };
 
 #endif // !__ENEMY_UFO_H__

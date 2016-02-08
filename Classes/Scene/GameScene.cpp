@@ -81,18 +81,40 @@ void GameScene::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::E
 void GameScene::Collision()
 {
 	//playerのポジション所得
-	auto pos = player.getPos();
+	auto p_pos = player.getPos();
 	
-	
-	//画面外にいったらゲームオーバー
-	if (pos.y > visibleSize.height + 50)
+	//UFOの座標
+	auto e_pos = enemy_ufo.getEnemyPos();
+	//レーザーの座標
+	auto l_pos = enemy_ufo.getLazerPos();
+
+	//UFOとプレイヤーの判定
+	bool p_eHit = Collision::hit4(p_pos.x, p_pos.y, 40, e_pos.x, e_pos.y, 45);
+	if (p_eHit)
 	{
 		this->unscheduleUpdate();
 		cocos2d::Director::getInstance()->replaceScene(
 			cocos2d::TransitionFade::create(2.0f, Result::scene(), cocos2d::Color3B::RED)
 			);
 	}
-	else if (pos.y < -50)
+	//レーザーとプレイヤーの判定
+	bool p_lHit = Collision::hit4(p_pos.x, p_pos.y, 40, l_pos.x, l_pos.y, 5);
+	if (p_lHit)
+	{
+		this->unscheduleUpdate();
+		cocos2d::Director::getInstance()->replaceScene(
+			cocos2d::TransitionFade::create(2.0f, Result::scene(), cocos2d::Color3B::RED)
+			);
+	}
+	//画面外にいったらゲームオーバー
+	if (p_pos.y > visibleSize.height + 50)
+	{
+		this->unscheduleUpdate();
+		cocos2d::Director::getInstance()->replaceScene(
+			cocos2d::TransitionFade::create(2.0f, Result::scene(), cocos2d::Color3B::RED)
+			);
+	}
+	else if (p_pos.y < -50)
 	{
 		this->unscheduleUpdate();
 		cocos2d::Director::getInstance()->replaceScene(

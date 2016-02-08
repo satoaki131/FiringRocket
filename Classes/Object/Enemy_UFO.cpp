@@ -117,4 +117,7 @@ cocos2d::Sprite* Enemy_UFO::getUFOTexture(){ return _texture; }
 
 bool Enemy_UFO::ActiveCheck(){ return _active; }
 
-cocos2d::Vec2 Enemy_UFO::getPos(){ return _pos; }
+cocos2d::Vec2 Enemy_UFO::getEnemyPos(){ return _pos; }
+
+cocos2d::Vec2 Enemy_UFO::getLazerPos(){ return _lazer_pos; }
+

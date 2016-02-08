@@ -12,7 +12,7 @@ Enemy_UFO::Enemy_UFO()
 	_active = false;
 	_repeat_time = 20 * 60;
 	_mode = START;
-	_lazer = cocos2d::ParticleSystemQuad::create("Particle/Meteo.plist");
+	_lazer = cocos2d::ParticleSystemQuad::create("Particle/Lazer.plist");
 	_lazer_pos = cocos2d::Vec2(0, 0);
 	_p_pos = cocos2d::Vec2(0, 0);
 	_lazer_move = _p_pos - _lazer_pos;

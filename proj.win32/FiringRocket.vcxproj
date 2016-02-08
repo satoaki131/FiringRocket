@@ -148,6 +148,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Manager\Score.cpp" />
     <ClCompile Include="..\Classes\Manager\Sound.cpp" />
     <ClCompile Include="..\Classes\Object\Enemy_UFO.cpp" />
+    <ClCompile Include="..\Classes\Object\Meteo.cpp" />
     <ClCompile Include="..\Classes\Object\Player.cpp" />
     <ClCompile Include="..\Classes\Scene\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\Scene\GameScene.cpp" />
@@ -161,6 +162,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Manager\Score.h" />
     <ClInclude Include="..\Classes\Manager\Sound.h" />
     <ClInclude Include="..\Classes\Object\Enemy_UFO.h" />
+    <ClInclude Include="..\Classes\Object\Meteo.h" />
     <ClInclude Include="..\Classes\Object\Player.h" />
     <ClInclude Include="..\Classes\Scene\AppDelegate.h" />
     <ClInclude Include="..\Classes\Scene\GameScene.h" />

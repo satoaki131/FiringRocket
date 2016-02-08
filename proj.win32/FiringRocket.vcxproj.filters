@@ -54,6 +54,9 @@
     <ClCompile Include="..\Classes\Manager\Hit.cpp">
       <Filter>src\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Object\Meteo.cpp">
+      <Filter>src\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -88,6 +91,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Manager\Hit.h">
       <Filter>src\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Object\Meteo.h">
+      <Filter>src\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

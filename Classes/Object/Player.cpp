@@ -16,8 +16,8 @@ Player::Player()
 	_fire_pos[LEFT] = cocos2d::Vec2(_pos.x + (_fire_move[LEFT].x * std::cos(_fire_rad[LEFT])), _pos.y + (_fire_move[LEFT].y * std::sin(_fire_rad[LEFT])));
 	_fire_angle[LEFT] = 103.0f;
 	_fire_rad[LEFT] = _fire_angle[LEFT] * (M_PI / 180);
-	_fire[LEFT] = cocos2d::ParticleSystemQuad::create("Particle/particle_texture.plist");
-	_fire[RIGHT] = cocos2d::ParticleSystemQuad::create("Particle/particle_texture.plist");
+	_fire[LEFT] = cocos2d::ParticleSystemQuad::create("Particle/Fire.plist");
+	_fire[RIGHT] = cocos2d::ParticleSystemQuad::create("Particle/Fire.plist");
 	_fire_move[RIGHT] = cocos2d::Vec2(65, -65);
 	_fire_pos[RIGHT] = cocos2d::Vec2(_pos.x + (_fire_move[RIGHT].x * std::cos(_fire_rad[RIGHT])), _pos.y + (_fire_move[RIGHT].y * std::sin(_fire_rad[RIGHT])));
 	_fire_angle[RIGHT] = 83.0f;

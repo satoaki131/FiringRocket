@@ -38,12 +38,14 @@ bool GameScene::init()
 		this->addChild(_background[i], 1);
 	}
 
+	//スコアの文字表示
 	auto label = Score::Init(30);
 	player.Init(dispatcher, this, visibleSize);
 	this->scheduleUpdate();
 
+	enemy_ufo.Init();
 	this->addChild(enemy_ufo.getUFOTexture(), 1);
-
+	this->addChild(enemy_ufo._lazer, 1);
 	this->addChild(player._fire[LEFT], 1);
 	this->addChild(player._fire[RIGHT], 1);
 	this->addChild(player.getPlayerTexture(), 1);
@@ -59,7 +61,7 @@ bool GameScene::init()
 void GameScene::update(float delta)
 {
 	player.Update();
-	enemy_ufo.Update();
+	enemy_ufo.Update(player.getPos());
 	this->removeChild(_score);
 	_score = Score::Update(30);
 	this->addChild(_score);
@@ -80,6 +82,7 @@ void GameScene::Collision()
 {
 	//playerのポジション所得
 	auto pos = player.getPos();
+	
 	
 	//画面外にいったらゲームオーバー
 	if (pos.y > visibleSize.height + 50)

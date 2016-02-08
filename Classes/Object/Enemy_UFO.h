@@ -20,16 +20,22 @@ private:
 	int _randomPoint;
 	int _mode;
 	cocos2d::Size visibleSize;
+	cocos2d::Vec2 _lazer_pos;
+	cocos2d::Vec2 _p_pos;
+	cocos2d::Vec2 _lazer_move;
+	float _lazer_speed;
 public:
+	cocos2d::ParticleSystemQuad* _lazer;
 
-	void Update();
+	void Init();
+	void Update(cocos2d::Vec2 Player_pos);
 	Enemy_UFO();
 	~Enemy_UFO();
-	void Move();
-	void Action();
+	void Move(cocos2d::Vec2 Player_pos);
+	void Action(cocos2d::Vec2 Player_pos);
 	cocos2d::Sprite* getUFOTexture();
 	bool ActiveCheck();
-	int TimeCheck();
+	cocos2d::Vec2 getPos();
 };
 
 #endif // !__ENEMY_UFO_H__

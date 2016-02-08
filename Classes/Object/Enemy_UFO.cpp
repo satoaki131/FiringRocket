@@ -12,6 +12,11 @@ Enemy_UFO::Enemy_UFO()
 	_active = false;
 	_repeat_time = 20 * 60;
 	_mode = START;
+	_lazer = cocos2d::ParticleSystemQuad::create("Particle/Meteo.plist");
+	_lazer_pos = cocos2d::Vec2(0, 0);
+	_p_pos = cocos2d::Vec2(0, 0);
+	_lazer_move = _p_pos - _lazer_pos;
+	_lazer_speed = 0.02f;
 }
 
 
@@ -20,13 +25,18 @@ Enemy_UFO::~Enemy_UFO()
 
 }
 
-
-void Enemy_UFO::Update()
+void Enemy_UFO::Init()
 {
-	Move();
+	_lazer->stopSystem();
 }
 
-void Enemy_UFO::Move()
+
+void Enemy_UFO::Update(cocos2d::Vec2 Player_pos)
+{
+	Move(Player_pos);
+}
+
+void Enemy_UFO::Move(cocos2d::Vec2 Player_pos)
 {
 	if (!_active)
 	{
@@ -54,7 +64,7 @@ void Enemy_UFO::Move()
 			if (_pos.y == visibleSize.height / 2 + 100)_mode = ACTION;
 			break;
 		case ACTION:
-			Action();
+			Action(Player_pos);
 			break;
 		case END:
 			_texture->setPosition(_pos);
@@ -73,16 +83,32 @@ void Enemy_UFO::Move()
 		default:
 			break;
 		}
+
+		//レーザーの移動処理
+		if (_lazer->isActive())
+		{
+			_lazer_pos += _lazer_move * _lazer_speed;
+			_lazer->setPosition(_lazer_pos);
+		}
+
 	}
 }
 
-void Enemy_UFO::Action()
+void Enemy_UFO::Action(cocos2d::Vec2 Player_pos)
 {
 	_repeat_time--;
-	if (_repeat_time == 0)
-	{
-		//ビーム生成処理
 
+	if (_repeat_time == 60 * 1)
+	{
+		_lazer_pos = _pos;
+		_lazer->setPosition(_lazer_pos);
+		_lazer->resetSystem();
+		_p_pos = Player_pos;
+		_lazer_move = _p_pos - _lazer_pos;
+	}
+
+	if (_repeat_time == 0)
+	{	
 		_mode = END;
 	}
 }
@@ -91,5 +117,4 @@ cocos2d::Sprite* Enemy_UFO::getUFOTexture(){ return _texture; }
 
 bool Enemy_UFO::ActiveCheck(){ return _active; }
 
-int Enemy_UFO::TimeCheck(){ return _repeat_time; }
-
+cocos2d::Vec2 Enemy_UFO::getPos(){ return _pos; }

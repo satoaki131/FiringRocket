@@ -43,6 +43,7 @@ bool GameScene::init()
 	player.Init(dispatcher, this, visibleSize);
 	this->scheduleUpdate();
 
+	this->addChild(meteo.getTexture(), 1);
 	enemy_ufo.Init();
 	this->addChild(enemy_ufo.getUFOTexture(), 1);
 	this->addChild(enemy_ufo._lazer, 1);
@@ -62,6 +63,7 @@ void GameScene::update(float delta)
 {
 	player.Update();
 	enemy_ufo.Update(player.getPos());
+	meteo.Update();
 	this->removeChild(_score);
 	_score = Score::Update(30);
 	this->addChild(_score);

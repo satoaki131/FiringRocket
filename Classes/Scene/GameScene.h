@@ -6,6 +6,7 @@
 #include "Scene/Pause.h"
 #include "Manager/Score.h"
 #include "Object/Enemy_UFO.h"
+#include "Object/Meteo.h"
 
 class GameScene : public cocos2d::Layer
 {
@@ -14,6 +15,7 @@ private:
 	cocos2d::Label* _score;
 	Player player;
 	Enemy_UFO enemy_ufo;
+	Meteo meteo;
 	std::vector<cocos2d::DrawNode*> _background;
 	std::vector<cocos2d::Vec2> _backgroundpos;
 public:

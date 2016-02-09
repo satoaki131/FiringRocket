@@ -7,6 +7,8 @@ class Meteo
 {
 private:
 	cocos2d::Vec2 _pos;
+	cocos2d::Sprite* _texture;
+	float angle;
 public:
 	cocos2d::ParticleSystemQuad* _part;
 
@@ -15,7 +17,9 @@ public:
 
 	void Update();
 	void Move();
+	void setRot();
 	cocos2d::Vec2 getPos();
+	cocos2d::Sprite* getTexture();
 };
 
 #endif // !__METEO_H__

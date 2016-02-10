@@ -7,7 +7,7 @@ cocos2d::Scene* GameScene::scene()
 	auto scene = cocos2d::Scene::create();
 	auto layer = GameScene::create();
 	scene->addChild(layer);
-	
+
 	return scene;
 }
 
@@ -24,7 +24,7 @@ bool GameScene::init()
 	auto keylistener = cocos2d::EventListenerKeyboard::create();
 	keylistener->onKeyPressed = CC_CALLBACK_2(GameScene::onKeyPressed, this);
 	dispatcher->addEventListenerWithSceneGraphPriority(keylistener, this);
-	
+
 
 	//ウィンドウサイズ所得
 	visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
@@ -42,9 +42,11 @@ bool GameScene::init()
 	auto label = Score::Init(30);
 	player.Init(dispatcher, this, visibleSize);
 	this->scheduleUpdate();
+	Meteo m;
+	meteo.push_back(m);
+	this->addChild(meteo[0]._part, 1);
+	this->addChild(meteo[0].getTexture(), 1);
 
-	this->addChild(meteo._part, 1);
-	this->addChild(meteo.getTexture(), 1);
 	enemy_ufo.Init();
 	this->addChild(enemy_ufo.getUFOTexture(), 1);
 	this->addChild(enemy_ufo._lazer, 1);
@@ -54,7 +56,7 @@ bool GameScene::init()
 	this->addChild(label, 1);
 	_score = Score::Update(30);
 	this->addChild(_score, 1);
-	
+
 
 	return true;
 }
@@ -64,12 +66,29 @@ void GameScene::update(float delta)
 {
 	player.Update();
 	enemy_ufo.Update(player.getPos());
-	meteo.Update(player.getPos());
+	for (int i = 0; i < meteo.size(); i++)
+	{
+		meteo[i].Update(player.getPos());
+	}
 	this->removeChild(_score);
 	_score = Score::Update(30);
 	this->addChild(_score);
 	Collision();
 	BackGroundMove();
+	MeteoCreater();
+}
+
+void GameScene::MeteoCreater()
+{
+	for (int i = meteo.size(); i < meteo.size() + 1; i++)
+	{
+		if (Score::getNowScore() == 60 * 5 * i)
+		{
+			Meteo m;
+			meteo.push_back(m);
+			this->addChild(meteo[i].getTexture(), 1);
+		}
+	}
 }
 
 void GameScene::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
@@ -85,7 +104,7 @@ void GameScene::Collision()
 {
 	//playerのポジション所得
 	auto p_pos = player.getPos();
-	
+
 	//UFOの座標
 	auto e_pos = enemy_ufo.getEnemyPos();
 	//レーザーの座標

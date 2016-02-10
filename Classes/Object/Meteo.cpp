@@ -13,7 +13,7 @@ Meteo::Meteo()
 	_randomPoint = cocos2d::random(0, 1);
 	_repeat_time = 5 * 60;
 	_p_pos = cocos2d::Vec2(1000, 1000);
-	_move_pos = cocos2d::Vec2(0, 0);
+	_move_pos = cocos2d::Vec2(1, 0);
 	_move_speed = cocos2d::random(0.005f, 0.01f);
 	_part = cocos2d::ParticleSystemQuad::create("Particle/Meteo.plist");
 	_part->stopSystem();

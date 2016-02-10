@@ -15,7 +15,7 @@ private:
 	cocos2d::Label* _score;
 	Player player;
 	Enemy_UFO enemy_ufo;
-	Meteo meteo;
+	std::vector<Meteo> meteo;
 	std::vector<cocos2d::DrawNode*> _background;
 	std::vector<cocos2d::Vec2> _backgroundpos;
 public:
@@ -26,6 +26,7 @@ public:
 	virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 	void Collision();
 	void BackGroundMove();
+	void MeteoCreater();
 	CREATE_FUNC(GameScene);
 
 };

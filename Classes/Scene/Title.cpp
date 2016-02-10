@@ -63,7 +63,8 @@ bool Title::init()
 	auto background = cocos2d::Sprite::create("Texture/BackGround.png");
 	background->setPosition(background_pos);
 	
-	//player.Init(dispatcher, this, visibleSize);
+	player.Init(dispatcher, this, visibleSize);
+	player.setPos(cocos2d::Vec2(visibleSize.width / 2, -45));
 
 	//点の描画
 	//auto point1 = cocos2d::DrawNode::create();
@@ -78,9 +79,9 @@ bool Title::init()
 	this->addChild(background, 1);
 	this->addChild(title_label, 1);
 	this->addChild(start_label, 1);
-	//this->addChild(player._fire[LEFT], 1);
-	//this->addChild(player._fire[RIGHT], 1);
-	//this->addChild(player.getPlayerTexture(), 1);
+	this->addChild(player._fire[LEFT], 1);
+	this->addChild(player._fire[RIGHT], 1);
+	this->addChild(player.getPlayerTexture(), 1);
 	//this->addChild(point1, 1);
 	//this->addChild(point2, 1);
 
@@ -122,11 +123,32 @@ void Title::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event
 		//呼ばれる順番の問題
 		//scheduleは止めてからシーン移動処理が必要
 		this->unscheduleUpdate();
+		player._fire[LEFT]->resetSystem();
+		player._fire[RIGHT]->resetSystem();
+		this->schedule(schedule_selector(Title::LoadGame));
+		//cocos2d::Director::getInstance()->replaceScene(
+		//	cocos2d::TransitionFade::create(2.0f, GameScene::scene(), cocos2d::Color3B::WHITE)
+		//	//cocos2d::TransitionCrossFade::create(2.0f, GameScene::scene())
+		//	);
+		sound.BGMStop();
+	}
+	
+}
+
+void Title::LoadGame(float delta)
+{
+	player.TitleMove();
+	auto pos = player.getPos();
+	if (pos.y == visibleSize.height - 100)
+	{
 		cocos2d::Director::getInstance()->replaceScene(
 			cocos2d::TransitionFade::create(2.0f, GameScene::scene(), cocos2d::Color3B::WHITE)
 			//cocos2d::TransitionCrossFade::create(2.0f, GameScene::scene())
 			);
-		sound.BGMStop();
 	}
-	
+
+	if (pos.y > visibleSize.height + 50)
+	{
+		this->unschedule(schedule_selector(Title::LoadGame));
+	}
 }

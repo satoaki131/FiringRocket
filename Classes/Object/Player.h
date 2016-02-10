@@ -40,6 +40,8 @@ public:
 	cocos2d::Sprite* getPlayerTexture();
 	void MoveAction();
 	cocos2d::ParticleSystemQuad* _fire[2];
+	void setPos(cocos2d::Vec2 set_pos);
+	void TitleMove();
 
 };
 

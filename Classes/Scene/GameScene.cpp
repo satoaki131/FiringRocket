@@ -131,6 +131,7 @@ void GameScene::Collision()
 			);
 	}
 
+	//è¦Î‚ÆƒvƒŒƒCƒ„[‚Ì‚ ‚½‚è”»’è
 	for (int i = 0; i < meteo.size(); i++)
 	{
 		auto meteo_pos = meteo[i].getPos();

@@ -14,13 +14,14 @@ private:
 	Sound sound;
 	cocos2d::Size visibleSize;
 	//cocos2d::Vec2 origin;
-	//Player player;
+	Player player;
 public:
 	virtual bool init();
 	static cocos2d::Scene* scene();
 	virtual void update(float delta);
 	virtual void onMouseDown(cocos2d::Event* event);
 	virtual void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
+	void LoadGame(float delta);
 
 	CREATE_FUNC(Title);
 };

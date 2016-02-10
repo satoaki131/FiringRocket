@@ -9,7 +9,7 @@ Player::Player()
 	_rad = _angle * (M_PI / 180);
 	_keyPressed[LEFT] = false;
 	_keyPressed[RIGHT] = false;
-	_movepos = cocos2d::Vec2(_pos.x + (20 * std::cos(_rad + (M_PI / 180))), _pos.y + (20 * std::sin(_rad + (M_PI / 180)))); 
+	_movepos = cocos2d::Vec2(_pos.x + (20 * std::cos(_rad + (M_PI / 180))), _pos.y + (20 * std::sin(_rad + (M_PI / 180))));
 	_moveamount = _movepos - _pos;
 	_movespeed = 0.1f;
 	_fire_move[LEFT] = cocos2d::Vec2(65, -65);
@@ -42,6 +42,7 @@ void Player::Init(cocos2d::EventDispatcher* dispatcher, cocos2d::Node* node, coc
 	dispatcher->addEventListenerWithSceneGraphPriority(keylistener, node);
 
 	_texture->setScale(0.4f);
+	setPos();
 	_fire[LEFT]->stopSystem();
 	_fire[RIGHT]->stopSystem();
 }
@@ -85,11 +86,17 @@ void Player::setRot()
 	_texture->setRotation(-_angle);
 }
 
-cocos2d::Vec2 Player::getPos(){	return _pos; }
+cocos2d::Vec2 Player::getPos(){ return _pos; }
+
+void Player::setPos(cocos2d::Vec2 set_pos)
+{
+	_pos = set_pos;
+	_texture->setPosition(_pos);
+}
 
 void Player::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
-	if (keyCode == cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW 
+	if (keyCode == cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW
 		|| keyCode == cocos2d::EventKeyboard::KeyCode::KEY_A)
 	{
 		_keyPressed[LEFT] = true;
@@ -101,7 +108,7 @@ void Player::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Even
 		_keyPressed[RIGHT] = true;
 		_fire[RIGHT]->resetSystem();
 	}
-	
+
 }
 
 void Player::onKeyRereased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
@@ -158,10 +165,18 @@ void Player::MoveAction()
 	{
 		_pos.x = -50;
 	}
-	else if(_pos.x < -50)
+	else if (_pos.x < -50)
 	{
 		_pos.x = _visiblesize.width + 50;
 	}
 }
 
+//ƒ^ƒCƒgƒ‹‚Å‚Ì‚ÝŒÄ‚Î‚ê‚éUpdateŠÖ”
+void Player::TitleMove()
+{
+	_pos.y += 2.0f;
+	setPos();
+	_fire[LEFT]->setPosition(_fire_pos[LEFT]);
+	_fire[RIGHT]->setPosition(_fire_pos[RIGHT]);
 
+}

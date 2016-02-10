@@ -46,3 +46,5 @@ void Score::ResetScore()
 {
 	_score = 0;
 }
+
+int Score::getNowScore(){ return _score; }

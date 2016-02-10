@@ -3,16 +3,16 @@
 
 #include "cocos2d.h"
 
-enum
-{
-	START,
-	ACTION,
-	END
-};
 
 class Enemy_UFO
 {
 private:
+	enum
+	{
+		START,
+		ACTION,
+		END
+	};
 	cocos2d::Sprite* _texture;
 	cocos2d::Vec2 _pos;
 	bool _active; //ê∂Ç´ÇƒÇÈÇ©éÄÇÒÇ≈ÇÈÇ©

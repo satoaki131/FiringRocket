@@ -15,6 +15,7 @@ public:
 	static cocos2d::Label* Init(int size);
 	static cocos2d::Label* DisplayScore(int size);
 	static void ResetScore();
+	static int getNowScore();
 };
 
 #endif // !__SCORE_H__

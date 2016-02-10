@@ -80,12 +80,14 @@ void GameScene::update(float delta)
 
 void GameScene::MeteoCreater()
 {
+
 	for (int i = meteo.size(); i < meteo.size() + 1; i++)
 	{
-		if (Score::getNowScore() == 60 * 5 * i)
+		if (Score::getNowScore() == 60 * 20 * i)
 		{
 			Meteo m;
 			meteo.push_back(m);
+			this->addChild(meteo[i]._part, 1);
 			this->addChild(meteo[i].getTexture(), 1);
 		}
 	}
@@ -127,6 +129,19 @@ void GameScene::Collision()
 		cocos2d::Director::getInstance()->replaceScene(
 			cocos2d::TransitionFade::create(2.0f, Result::scene(), cocos2d::Color3B::RED)
 			);
+	}
+
+	for (int i = 0; i < meteo.size(); i++)
+	{
+		auto meteo_pos = meteo[i].getPos();
+		bool p_mhit = Collision::hit4(p_pos.x, p_pos.y, 40, meteo_pos.x, meteo_pos.y, 30);
+		if (p_mhit)
+		{
+			this->unscheduleUpdate();
+			cocos2d::Director::getInstance()->replaceScene(
+				cocos2d::TransitionFade::create(2.0f, Result::scene(), cocos2d::Color3B::RED)
+				);
+		}
 	}
 	//画面外にいったらゲームオーバー
 	if (p_pos.y > visibleSize.height + 50)

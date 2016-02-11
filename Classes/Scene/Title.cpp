@@ -51,6 +51,7 @@ bool Title::init()
 	auto title_label = cocos2d::Label::createWithTTF("Firing Rocket", "fonts/JKG-M_3.ttf", 65);
 	title_label->setColor(cocos2d::Color3B::ORANGE);
 	title_label->setPosition(cocos2d::Vec2(visibleSize.width / 2, visibleSize.height / 2 + title_label->getContentSize().height));
+	title_label->setTag(1);
 
 	auto start_label = cocos2d::Label::createWithTTF("Enter to Start", "fonts/JKG-M_3.ttf", 30);
 	start_label->setColor(cocos2d::Color3B::MAGENTA);
@@ -63,7 +64,8 @@ bool Title::init()
 	auto background = cocos2d::Sprite::create("Texture/BackGround.png");
 	background->setPosition(background_pos);
 	
-	player.Init(dispatcher, this, visibleSize);
+	//player.Init(dispatcher, this, visibleSize);
+	player.getPlayerTexture()->setScale(0.4f);
 	player.setPos(cocos2d::Vec2(visibleSize.width / 2, -45));
 
 	//“_‚Ì•`‰æ
@@ -126,11 +128,9 @@ void Title::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event
 		player._fire[LEFT]->resetSystem();
 		player._fire[RIGHT]->resetSystem();
 		this->schedule(schedule_selector(Title::LoadGame));
-		//cocos2d::Director::getInstance()->replaceScene(
-		//	cocos2d::TransitionFade::create(2.0f, GameScene::scene(), cocos2d::Color3B::WHITE)
-		//	//cocos2d::TransitionCrossFade::create(2.0f, GameScene::scene())
-		//	);
-		sound.BGMStop();
+		auto start_label = this->getChildByTag(2);
+		auto fade = cocos2d::FadeOut::create(1);
+		start_label->runAction(fade);
 	}
 	
 }
@@ -139,16 +139,20 @@ void Title::LoadGame(float delta)
 {
 	player.TitleMove();
 	auto pos = player.getPos();
-	if (pos.y == visibleSize.height - 100)
+	if (pos.y == visibleSize.height - 150)
 	{
+		auto title_label = this->getChildByTag(1);
+		auto fade = cocos2d::FadeOut::create(0.5);
+		title_label->runAction(fade);
 		cocos2d::Director::getInstance()->replaceScene(
-			cocos2d::TransitionFade::create(2.0f, GameScene::scene(), cocos2d::Color3B::WHITE)
-			//cocos2d::TransitionCrossFade::create(2.0f, GameScene::scene())
+			cocos2d::TransitionFade::create(3.0f, GameScene::scene(), cocos2d::Color3B::WHITE)
 			);
+		sound.BGMStop();
 	}
 
 	if (pos.y > visibleSize.height + 50)
 	{
 		this->unschedule(schedule_selector(Title::LoadGame));
 	}
+
 }

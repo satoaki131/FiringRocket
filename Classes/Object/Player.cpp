@@ -91,7 +91,19 @@ cocos2d::Vec2 Player::getPos(){ return _pos; }
 void Player::setPos(cocos2d::Vec2 set_pos)
 {
 	_pos = set_pos;
+	_movepos = cocos2d::Vec2(_pos.x + (20 * std::cos(_rad + (M_PI / 2))), _pos.y + (20 * std::sin(_rad + (M_PI / 2))));
+	_moveamount = _movepos - _pos;
+	_fire_pos[LEFT] = cocos2d::Vec2(_pos.x + (_fire_move[LEFT].x * std::cos(_fire_rad[LEFT])), _pos.y + (_fire_move[LEFT].y * std::sin(_fire_rad[LEFT])));
+	_fire_pos[RIGHT] = cocos2d::Vec2(_pos.x + (_fire_move[RIGHT].x * std::cos(_fire_rad[RIGHT])), _pos.y + (_fire_move[RIGHT].y * ::sin(_fire_rad[RIGHT])));
 	_texture->setPosition(_pos);
+	if (_fire[LEFT]->isActive())
+	{
+		_fire[LEFT]->setPosition(_fire_pos[LEFT]);
+	}
+	if (_fire[RIGHT]->isActive())
+	{
+		_fire[RIGHT]->setPosition(_fire_pos[RIGHT]);
+	}
 }
 
 void Player::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)

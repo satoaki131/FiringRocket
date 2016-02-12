@@ -4,12 +4,14 @@ int Score::_score;
 int Score::_highscore;
 std::string Score::_text = "Score : ";
 
-void Score::HighscoreUpdate(int &score)
+bool Score::HighscoreCheck(int &score)
 {
 	if (score > _highscore)
 	{		
 		_highscore = score;
+		return true;
 	}
+	return false;
 }
 
 

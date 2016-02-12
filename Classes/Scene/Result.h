@@ -7,6 +7,7 @@ class Result : public cocos2d::Layer
 {
 private:
 	cocos2d::Size visiblesize;
+	cocos2d::ParticleSystemQuad* fountain;
 public:
 	static cocos2d::Scene* scene();
 	virtual bool init();

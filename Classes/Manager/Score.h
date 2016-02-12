@@ -10,7 +10,7 @@ private:
 	static int _highscore;
 	static std::string _text;
 public:
-	static void HighscoreUpdate(int &score);
+	static bool HighscoreCheck(int &score);
 	static cocos2d::Label* Update(int size);
 	static cocos2d::Label* Init(int size);
 	static cocos2d::Label* DisplayScore(int size);

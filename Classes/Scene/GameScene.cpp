@@ -96,7 +96,7 @@ void GameScene::MeteoCreater()
 void GameScene::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {
 	if (keyCode == cocos2d::EventKeyboard::KeyCode::KEY_ENTER)
-	{
+	{ 
 		cocos2d::Director::getInstance()->pushScene(Pause::scene());
 	}
 }

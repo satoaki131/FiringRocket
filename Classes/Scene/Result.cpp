@@ -22,14 +22,34 @@ bool Result::init()
 	keylistener->onKeyPressed = CC_CALLBACK_2(Result::onKeyPressed, this);
 	dispatcher->addEventListenerWithSceneGraphPriority(keylistener, this);
 	visiblesize = cocos2d::Director::getInstance()->getVisibleSize();
+	auto score = Score::getNowScore();
+	//ハイスコアかどうか確認
+	auto highscoreflug = Score::HighscoreCheck(score);
 
-	auto score_label = cocos2d::Label::createWithTTF("Score :", "fonts/JKG-M_3.ttf", 50);
-	score_label->setPosition(visiblesize.width / 2 - 70, visiblesize.height / 2);
-	this->addChild(score_label, 1);
+	if (highscoreflug) //ハイスコアなら
+	{
+		fountain = cocos2d::ParticleSystemQuad::create("Particle/Fountain.plist");
+		fountain->setPosition(visiblesize.width / 2, -70);
+		this->addChild(fountain, 1);
 
-	auto score = Score::DisplayScore(50);
-	score->setPosition(visiblesize.width / 2 + 75, visiblesize.height / 2);
-	this->addChild(score, 1);
+		auto score_label = cocos2d::Label::createWithTTF("Score :", "fonts/JKG-M_3.ttf", 50);
+		score_label->setPosition(visiblesize.width / 2 - 70, visiblesize.height / 2);
+		this->addChild(score_label, 1);
+
+		auto scoredraw = Score::DisplayScore(50);
+		scoredraw->setPosition(visiblesize.width / 2 + 75, visiblesize.height / 2);
+		this->addChild(scoredraw, 1);
+	}
+	else //違うとき
+	{
+		auto score_label = cocos2d::Label::createWithTTF("Score :", "fonts/JKG-M_3.ttf", 50);
+		score_label->setPosition(visiblesize.width / 2 - 70, visiblesize.height / 2);
+		this->addChild(score_label, 1);
+
+		auto scoredraw = Score::DisplayScore(50);
+		scoredraw->setPosition(visiblesize.width / 2 + 75, visiblesize.height / 2);
+		this->addChild(scoredraw, 1);
+	}
 
 	return true;
 }

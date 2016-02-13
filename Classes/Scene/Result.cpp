@@ -24,13 +24,18 @@ bool Result::init()
 	visiblesize = cocos2d::Director::getInstance()->getVisibleSize();
 	auto score = Score::getNowScore();
 	//ハイスコアかどうか確認
-	auto highscoreflug = Score::HighscoreCheck(score);
-
-	if (highscoreflug) //ハイスコアなら
+	_highscoreflug = Score::HighscoreCheck(score);
+	if (_highscoreflug) //ハイスコアなら
 	{
 		fountain = cocos2d::ParticleSystemQuad::create("Particle/Fountain.plist");
 		fountain->setPosition(visiblesize.width / 2, -70);
 		this->addChild(fountain, 1);
+
+		_highscore_label = cocos2d::Label::createWithTTF("HIGHSCORE!!", "fonts/JKG-M_3.ttf", 70);
+		_highscore_label->setPosition(visiblesize.width / 2, visiblesize.height - 100);
+		color = cocos2d::Color4B(cocos2d::random(0, 255), cocos2d::random(0, 255), cocos2d::random(0, 255), 255);
+		_highscore_label->setTextColor(color);
+		this->addChild(_highscore_label, 1);
 
 		auto score_label = cocos2d::Label::createWithTTF("Score :", "fonts/JKG-M_3.ttf", 50);
 		score_label->setPosition(visiblesize.width / 2 - 70, visiblesize.height / 2);
@@ -51,8 +56,21 @@ bool Result::init()
 		this->addChild(scoredraw, 1);
 	}
 
+	this->scheduleUpdate();
+
 	return true;
 }
+
+
+void Result::update(float delta)
+{
+	if (_highscoreflug)
+	{
+		color = cocos2d::Color4B(cocos2d::random(0, 255), cocos2d::random(0, 255), cocos2d::random(0, 255), 255);
+		_highscore_label->setTextColor(color);
+	}
+}
+
 
 void Result::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event)
 {

@@ -27,6 +27,7 @@ cocos2d::Label* Score::Update(int size)
 
 cocos2d::Label* Score::Init(int size)
 {
+	
 	auto visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
 	auto label = cocos2d::Label::createWithTTF(_text, "fonts/JKG-M_3.ttf", size);
 	label->setPosition(visibleSize.width - 170, visibleSize.height - 20);

@@ -10,14 +10,14 @@
     <Filter Include="src\Scene">
       <UniqueIdentifier>{f28e6548-9c04-42e8-b00b-da597026628a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Manager">
-      <UniqueIdentifier>{ecfd553c-2450-4d33-ad5a-788c8bd9dc87}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Object">
       <UniqueIdentifier>{1d6b1141-24cd-472c-8648-0fa68b0d14a4}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\win32">
       <UniqueIdentifier>{84a8ebd7-7cf0-47f6-b75e-d441df67da40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Utility">
+      <UniqueIdentifier>{ecfd553c-2450-4d33-ad5a-788c8bd9dc87}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -34,7 +34,7 @@
       <Filter>src\Scene</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Manager\Sound.cpp">
-      <Filter>src\Manager</Filter>
+      <Filter>src\Utility</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Object\Player.cpp">
       <Filter>src\Object</Filter>
@@ -43,7 +43,7 @@
       <Filter>src\Scene</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Manager\Score.cpp">
-      <Filter>src\Manager</Filter>
+      <Filter>src\Utility</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Scene\Result.cpp">
       <Filter>src\Scene</Filter>
@@ -52,7 +52,7 @@
       <Filter>src\Object</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Manager\Hit.cpp">
-      <Filter>src\Manager</Filter>
+      <Filter>src\Utility</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Object\Meteo.cpp">
       <Filter>src\Object</Filter>
@@ -72,7 +72,7 @@
       <Filter>src\Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Manager\Sound.h">
-      <Filter>src\Manager</Filter>
+      <Filter>src\Utility</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Object\Player.h">
       <Filter>src\Object</Filter>
@@ -81,7 +81,7 @@
       <Filter>src\Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Manager\Score.h">
-      <Filter>src\Manager</Filter>
+      <Filter>src\Utility</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Scene\Result.h">
       <Filter>src\Scene</Filter>
@@ -90,7 +90,7 @@
       <Filter>src\Object</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Manager\Hit.h">
-      <Filter>src\Manager</Filter>
+      <Filter>src\Utility</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Object\Meteo.h">
       <Filter>src\Object</Filter>

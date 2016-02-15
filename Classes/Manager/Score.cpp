@@ -1,7 +1,8 @@
 #include "Score.h"
 
 int Score::_score;
-int Score::_highscore;
+cocos2d::UserDefault* Score::_userDefault = cocos2d::UserDefault::getInstance();
+int Score::_highscore = _userDefault->getIntegerForKey("HIGHSCORE", 0.0f);
 std::string Score::_text = "Score : ";
 
 bool Score::HighscoreCheck(int &score)
@@ -51,3 +52,5 @@ void Score::ResetScore()
 }
 
 int Score::getNowScore(){ return _score; }
+
+int Score::getHighScore(){ return _highscore; }

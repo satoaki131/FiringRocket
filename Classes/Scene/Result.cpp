@@ -25,6 +25,16 @@ bool Result::init()
 	//ハイスコアかどうか確認
 	_highscoreflug = Score::HighscoreCheck(score);
 	color_timer = 1;
+
+	//背景関連
+	for (int i = 0; i < 200; i++)
+	{
+		_background.push_back(cocos2d::DrawNode::create());
+		_backgroundpos.push_back(cocos2d::Vec2(cocos2d::random(0.0f, visiblesize.width), cocos2d::random(0.0f, visiblesize.height)));
+		_background[i]->drawDot(_backgroundpos[i], cocos2d::random(0.1f, 0.8f), cocos2d::Color4F::WHITE);
+		this->addChild(_background[i], 1);
+	}
+
 	if (_highscoreflug) //ハイスコアなら
 	{
 		fountain = cocos2d::ParticleSystemQuad::create("Particle/Fountain.plist");
@@ -36,10 +46,12 @@ bool Result::init()
 		_color = cocos2d::Color4B(cocos2d::random(0, 255), cocos2d::random(0, 255), cocos2d::random(0, 255), 255);
 		_highscore_label->setTextColor(_color);
 		this->addChild(_highscore_label, 1);
-
+		Score::_userDefault->setIntegerForKey("HIGHSCORE", score);
 	}
 	else //違うとき
 	{
+		//スコアのリセット
+		Score::_userDefault->deleteValueForKey("HIGHSCORE");
 	}
 
 	//共通部分

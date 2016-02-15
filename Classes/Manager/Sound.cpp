@@ -62,16 +62,16 @@ void Sound::EffectInit(char* path)
 }
 
 
-void Sound::EffectPlay(bool loop)
+void Sound::EffectPlay(bool loop, float pitch, float pan, float gain)
 {
 	if (file_path == nullptr)return;
 	if (loop)
 	{
-		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(file_path, true);
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(file_path, true, pitch, pan, gain);
 	}
 	else
 	{
-		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(file_path, false);
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(file_path, false, pitch, pan, gain);
 	}
 }
 

@@ -58,7 +58,7 @@ bool GameScene::init()
 	this->addChild(_score, 1);
 
 	sound.BGMInit("Sound/Main.mp3");
-	sound.BGMPlay(true);
+	//sound.BGMPlay(true);
 
 	return true;
 }
@@ -119,21 +119,13 @@ void GameScene::Collision()
 	bool p_eHit = Collision::hit4(p_pos.x, p_pos.y, 40, e_pos.x, e_pos.y, 45);
 	if (p_eHit)
 	{
-		this->unscheduleUpdate();
-		sound.BGMStop();
-		cocos2d::Director::getInstance()->replaceScene(
-			cocos2d::TransitionFade::create(2.0f, Result::scene(), cocos2d::Color3B::RED)
-			);
+		MoveResult();
 	}
 	//レーザーとプレイヤーの判定
 	bool p_lHit = Collision::hit4(p_pos.x, p_pos.y, 40, l_pos.x, l_pos.y, 5);
 	if (p_lHit)
 	{
-		this->unscheduleUpdate();
-		sound.BGMStop();
-		cocos2d::Director::getInstance()->replaceScene(
-			cocos2d::TransitionFade::create(2.0f, Result::scene(), cocos2d::Color3B::RED)
-			);
+		MoveResult();
 	}
 
 	//隕石とプレイヤーのあたり判定
@@ -143,29 +135,17 @@ void GameScene::Collision()
 		bool p_mhit = Collision::hit4(p_pos.x, p_pos.y, 40, meteo_pos.x, meteo_pos.y, 30);
 		if (p_mhit)
 		{
-			this->unscheduleUpdate();
-			sound.BGMStop();
-			cocos2d::Director::getInstance()->replaceScene(
-				cocos2d::TransitionFade::create(2.0f, Result::scene(), cocos2d::Color3B::RED)
-				);
+			MoveResult();
 		}
 	}
 	//画面外にいったらゲームオーバー
 	if (p_pos.y > visibleSize.height + 50)
 	{
-		this->unscheduleUpdate();
-		sound.BGMStop();
-		cocos2d::Director::getInstance()->replaceScene(
-			cocos2d::TransitionFade::create(2.0f, Result::scene(), cocos2d::Color3B::RED)
-			);
+		MoveResult();
 	}
 	else if (p_pos.y < -50)
 	{
-		this->unscheduleUpdate();
-		sound.BGMStop();
-		cocos2d::Director::getInstance()->replaceScene(
-			cocos2d::TransitionFade::create(2.0f, Result::scene(), cocos2d::Color3B::RED)
-			);
+		MoveResult();
 	}
 
 }
@@ -183,3 +163,13 @@ void GameScene::BackGroundMove()
 	}
 }
 
+
+void GameScene::MoveResult()
+{
+	this->unscheduleUpdate();
+	sound.BGMStop();
+	player._sound.EffectPlay(false);
+	cocos2d::Director::getInstance()->replaceScene(
+		cocos2d::TransitionFade::create(2.0f, Result::scene(), cocos2d::Color3B::RED)
+		);
+}

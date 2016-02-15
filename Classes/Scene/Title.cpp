@@ -37,7 +37,7 @@ bool Title::init()
 	//再生
 	//CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("Sound/titleBGM.mp3", true);
 	sound.BGMInit("Sound/titleBGM.mp3");
-	sound.BGMPlay(true);
+	//sound.BGMPlay(true);
 	
 	//ウィンドウサイズ所得
 	visibleSize = cocos2d::Director::getInstance()->getVisibleSize();

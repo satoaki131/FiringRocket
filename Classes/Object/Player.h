@@ -2,6 +2,7 @@
 #define __PLAYER_H__
 
 #include "cocos2d.h"
+#include "Manager/Sound.h"
 
 enum{
 	LEFT,
@@ -25,7 +26,7 @@ class Player
 	cocos2d::Vec2 _fire_move[2];
 	cocos2d::Size _visiblesize;
 public:
-
+	Sound _sound;
 	cocos2d::EventListenerKeyboard* keylistener;
 	Player();
 	~Player();

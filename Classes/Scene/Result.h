@@ -12,6 +12,8 @@ private:
 	cocos2d::Label* _highscore_label;
 	bool _highscoreflug;
 	int color_timer;
+	std::vector<cocos2d::DrawNode*> _background;
+	std::vector<cocos2d::Vec2> _backgroundpos;
 public:
 	static cocos2d::Scene* scene();
 	virtual bool init();

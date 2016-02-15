@@ -23,6 +23,7 @@ Player::Player()
 	_fire_angle[RIGHT] = 83.0f;
 	_fire_rad[RIGHT] = _fire_angle[RIGHT] * (M_PI / 180);
 	_visiblesize = cocos2d::Director::getInstance()->getVisibleSize();
+	_sound.EffectInit("Explosion.mp3");
 }
 
 

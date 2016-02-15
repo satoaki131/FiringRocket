@@ -19,7 +19,7 @@ public:
 	void BGMResumPlay();
 	
 	void EffectInit(char* path);
-	void EffectPlay(bool loop);
+	void EffectPlay(bool loop, float pitch = 1.0f, float pan = 1.0f, float gain = 1.0f);
 	void EffectStop();
 	
 };

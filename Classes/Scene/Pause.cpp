@@ -42,6 +42,8 @@ void Pause::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event
 {
 	if (keyCode == cocos2d::EventKeyboard::KeyCode::KEY_ENTER)
 	{
+		Sound sound;
+		sound.BGMResumPlay();
 		cocos2d::Director::getInstance()->popScene();
 	}
 }

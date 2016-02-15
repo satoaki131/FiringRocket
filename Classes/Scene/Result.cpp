@@ -16,7 +16,6 @@ bool Result::init()
 	{
 		return false;
 	}
-
 	auto dispatcher = cocos2d::Director::getInstance()->getEventDispatcher();
 	auto keylistener = cocos2d::EventListenerKeyboard::create();
 	keylistener->onKeyPressed = CC_CALLBACK_2(Result::onKeyPressed, this);
@@ -25,6 +24,7 @@ bool Result::init()
 	auto score = Score::getNowScore();
 	//ハイスコアかどうか確認
 	_highscoreflug = Score::HighscoreCheck(score);
+	color_timer = 1;
 	if (_highscoreflug) //ハイスコアなら
 	{
 		fountain = cocos2d::ParticleSystemQuad::create("Particle/Fountain.plist");
@@ -33,28 +33,23 @@ bool Result::init()
 
 		_highscore_label = cocos2d::Label::createWithTTF("HIGHSCORE!!", "fonts/JKG-M_3.ttf", 70);
 		_highscore_label->setPosition(visiblesize.width / 2, visiblesize.height - 100);
-		color = cocos2d::Color4B(cocos2d::random(0, 255), cocos2d::random(0, 255), cocos2d::random(0, 255), 255);
-		_highscore_label->setTextColor(color);
+		_color = cocos2d::Color4B(cocos2d::random(0, 255), cocos2d::random(0, 255), cocos2d::random(0, 255), 255);
+		_highscore_label->setTextColor(_color);
 		this->addChild(_highscore_label, 1);
 
-		auto score_label = cocos2d::Label::createWithTTF("Score :", "fonts/JKG-M_3.ttf", 50);
-		score_label->setPosition(visiblesize.width / 2 - 70, visiblesize.height / 2);
-		this->addChild(score_label, 1);
-
-		auto scoredraw = Score::DisplayScore(50);
-		scoredraw->setPosition(visiblesize.width / 2 + 75, visiblesize.height / 2);
-		this->addChild(scoredraw, 1);
 	}
 	else //違うとき
 	{
-		auto score_label = cocos2d::Label::createWithTTF("Score :", "fonts/JKG-M_3.ttf", 50);
-		score_label->setPosition(visiblesize.width / 2 - 70, visiblesize.height / 2);
-		this->addChild(score_label, 1);
-
-		auto scoredraw = Score::DisplayScore(50);
-		scoredraw->setPosition(visiblesize.width / 2 + 75, visiblesize.height / 2);
-		this->addChild(scoredraw, 1);
 	}
+
+	//共通部分
+	auto score_label = cocos2d::Label::createWithTTF("Score :", "fonts/JKG-M_3.ttf", 50);
+	score_label->setPosition(visiblesize.width / 2 - 70, visiblesize.height / 2);
+	this->addChild(score_label, 1);
+
+	auto scoredraw = Score::DisplayScore(50);
+	scoredraw->setPosition(visiblesize.width / 2 + 75, visiblesize.height / 2);
+	this->addChild(scoredraw, 1);
 
 	this->scheduleUpdate();
 
@@ -66,8 +61,13 @@ void Result::update(float delta)
 {
 	if (_highscoreflug)
 	{
-		color = cocos2d::Color4B(cocos2d::random(0, 255), cocos2d::random(0, 255), cocos2d::random(0, 255), 255);
-		_highscore_label->setTextColor(color);
+		color_timer--;
+		if (color_timer == 0)
+		{
+			_color = ColorRandom();
+			color_timer = 5;
+		}
+		_highscore_label->setTextColor(_color);
 	}
 }
 
@@ -83,3 +83,17 @@ void Result::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Even
 	}
 }
 
+cocos2d::Color4B Result::ColorRandom()
+{
+	std::vector<cocos2d::Color4B> color;
+	color.push_back(cocos2d::Color4B::BLUE);
+	color.push_back(cocos2d::Color4B::GREEN);
+	color.push_back(cocos2d::Color4B::MAGENTA);
+	color.push_back(cocos2d::Color4B::RED);
+	color.push_back(cocos2d::Color4B::WHITE);
+	color.push_back(cocos2d::Color4B::YELLOW);
+	color.push_back(cocos2d::Color4B::GRAY);
+	color.push_back(cocos2d::Color4B::ORANGE);
+	int number = cocos2d::random(0, (int)color.size() - 1);
+	return color[number];
+}

@@ -144,10 +144,10 @@ void Title::LoadGame(float delta)
 		auto title_label = this->getChildByTag(1);
 		auto fade = cocos2d::FadeOut::create(0.5);
 		title_label->runAction(fade);
+		sound.BGMStop();
 		cocos2d::Director::getInstance()->replaceScene(
 			cocos2d::TransitionFade::create(3.0f, GameScene::scene(), cocos2d::Color3B::WHITE)
 			);
-		sound.BGMStop();
 	}
 
 	if (pos.y > visibleSize.height + 50)

@@ -7,6 +7,7 @@
 #include "Manager/Score.h"
 #include "Object/Enemy_UFO.h"
 #include "Object/Meteo.h"
+#include "Manager/Sound.h"
 
 class GameScene : public cocos2d::Layer
 {
@@ -18,6 +19,7 @@ private:
 	std::vector<Meteo> meteo;
 	std::vector<cocos2d::DrawNode*> _background;
 	std::vector<cocos2d::Vec2> _backgroundpos;
+	Sound sound;
 public:
 	virtual bool init();
 	static cocos2d::Scene* scene();

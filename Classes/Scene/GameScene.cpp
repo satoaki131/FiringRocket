@@ -57,6 +57,8 @@ bool GameScene::init()
 	_score = Score::Update(30);
 	this->addChild(_score, 1);
 
+	sound.BGMInit("Sound/Main.mp3");
+	sound.BGMPlay(true);
 
 	return true;
 }
@@ -97,6 +99,7 @@ void GameScene::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::E
 {
 	if (keyCode == cocos2d::EventKeyboard::KeyCode::KEY_ENTER)
 	{ 
+		sound.BGMPause();
 		cocos2d::Director::getInstance()->pushScene(Pause::scene());
 	}
 }
@@ -117,6 +120,7 @@ void GameScene::Collision()
 	if (p_eHit)
 	{
 		this->unscheduleUpdate();
+		sound.BGMStop();
 		cocos2d::Director::getInstance()->replaceScene(
 			cocos2d::TransitionFade::create(2.0f, Result::scene(), cocos2d::Color3B::RED)
 			);
@@ -126,6 +130,7 @@ void GameScene::Collision()
 	if (p_lHit)
 	{
 		this->unscheduleUpdate();
+		sound.BGMStop();
 		cocos2d::Director::getInstance()->replaceScene(
 			cocos2d::TransitionFade::create(2.0f, Result::scene(), cocos2d::Color3B::RED)
 			);
@@ -139,6 +144,7 @@ void GameScene::Collision()
 		if (p_mhit)
 		{
 			this->unscheduleUpdate();
+			sound.BGMStop();
 			cocos2d::Director::getInstance()->replaceScene(
 				cocos2d::TransitionFade::create(2.0f, Result::scene(), cocos2d::Color3B::RED)
 				);
@@ -148,6 +154,7 @@ void GameScene::Collision()
 	if (p_pos.y > visibleSize.height + 50)
 	{
 		this->unscheduleUpdate();
+		sound.BGMStop();
 		cocos2d::Director::getInstance()->replaceScene(
 			cocos2d::TransitionFade::create(2.0f, Result::scene(), cocos2d::Color3B::RED)
 			);
@@ -155,6 +162,7 @@ void GameScene::Collision()
 	else if (p_pos.y < -50)
 	{
 		this->unscheduleUpdate();
+		sound.BGMStop();
 		cocos2d::Director::getInstance()->replaceScene(
 			cocos2d::TransitionFade::create(2.0f, Result::scene(), cocos2d::Color3B::RED)
 			);

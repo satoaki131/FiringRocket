@@ -44,6 +44,16 @@ void Sound::BGMStop()
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
 }
 
+void Sound::BGMPause()
+{
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
+}
+
+void Sound::BGMResumPlay()
+{
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
+}
+
 
 void Sound::EffectInit(char* path)
 {

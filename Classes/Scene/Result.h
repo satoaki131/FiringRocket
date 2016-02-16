@@ -2,6 +2,7 @@
 #define __RESULT_H__
 
 #include "cocos2d.h"
+#include "Manager/Sound.h"
 
 class Result : public cocos2d::Layer
 {
@@ -14,6 +15,7 @@ private:
 	int color_timer;
 	std::vector<cocos2d::DrawNode*> _background;
 	std::vector<cocos2d::Vec2> _backgroundpos;
+	Sound sound;
 public:
 	static cocos2d::Scene* scene();
 	virtual bool init();

@@ -2,7 +2,7 @@
 #define __ENEMY_UFO_H__
 
 #include "cocos2d.h"
-
+#include "Manager/Sound.h"
 
 class Enemy_UFO
 {
@@ -24,6 +24,7 @@ private:
 	cocos2d::Vec2 _p_pos;
 	cocos2d::Vec2 _lazer_move;
 	float _lazer_speed;
+	Sound sound;
 public:
 	cocos2d::ParticleSystemQuad* _lazer;
 

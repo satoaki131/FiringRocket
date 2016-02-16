@@ -17,6 +17,7 @@ Enemy_UFO::Enemy_UFO()
 	_p_pos = cocos2d::Vec2(0, 0);
 	_lazer_move = _p_pos - _lazer_pos;
 	_lazer_speed = 0.02f;
+	sound.EffectInit("Sound/beamgun.mp3");
 }
 
 
@@ -103,6 +104,7 @@ void Enemy_UFO::Action(cocos2d::Vec2 Player_pos)
 		_lazer_pos = _pos;
 		_lazer->setPosition(_lazer_pos);
 		_lazer->resetSystem();
+		sound.EffectPlay(false);
 		_p_pos = Player_pos;
 		_lazer_move = _p_pos - _lazer_pos;
 	}

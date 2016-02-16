@@ -36,10 +36,10 @@ cocos2d::Label* Score::Init(int size)
 	return label;
 }
 
-cocos2d::Label* Score::DisplayScore(int size)
+cocos2d::Label* Score::DisplayScore(int size, int score)
 {
 	auto visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
-	auto label = cocos2d::Label::createWithTTF(cocos2d::StringUtils::toString(_score), "fonts/JKG-M_3.ttf", size);
+	auto label = cocos2d::Label::createWithTTF(cocos2d::StringUtils::toString(score), "fonts/JKG-M_3.ttf", size);
 	label->setPosition(visibleSize.width - 60, visibleSize.height - 20);
 
 	return label;
@@ -49,6 +49,12 @@ cocos2d::Label* Score::DisplayScore(int size)
 void Score::ResetScore()
 {
 	_score = 0;
+}
+
+//発表用デバック専用
+void Score::ResetHighScore()
+{
+	_highscore = 0;
 }
 
 int Score::getNowScore(){ return _score; }

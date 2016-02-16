@@ -2,6 +2,7 @@
 #include "Scene/GameScene.h"
 #include <base/CCEvent.h>
 #include "SimpleAudioEngine.h"
+#include "Manager/Score.h"
 
 cocos2d::Scene* Title::scene()
 {
@@ -37,7 +38,7 @@ bool Title::init()
 	//再生
 	//CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("Sound/titleBGM.mp3", true);
 	sound.BGMInit("Sound/titleBGM.mp3");
-	//sound.BGMPlay(true);
+	sound.BGMPlay(true);
 	
 	//ウィンドウサイズ所得
 	visibleSize = cocos2d::Director::getInstance()->getVisibleSize();
@@ -133,6 +134,12 @@ void Title::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event
 		start_label->runAction(fade);
 	}
 	
+	if (keyCode == cocos2d::EventKeyboard::KeyCode::KEY_SPACE)
+	{
+		//スコアのリセット
+		Score::ResetHighScore();
+		Score::_userDefault->deleteValueForKey("HIGHSCORE");
+	}
 }
 
 void Title::LoadGame(float delta)

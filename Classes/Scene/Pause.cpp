@@ -27,7 +27,7 @@ bool Pause::init()
 	font->setColor(cocos2d::Color3B::YELLOW);
 	font->setPosition(cocos2d::Vec2(visibleSize.width/2, visibleSize.height/2 + 100));
 	
-	auto score = Score::DisplayScore(30);
+	auto score = Score::DisplayScore(30, Score::getNowScore());
 	score->setPosition(cocos2d::Vec2(visibleSize.width / 2 + 50, visibleSize.height / 2));
 	auto score_font = Score::Init(30);
 	score_font->setPosition(cocos2d::Vec2(visibleSize.width / 2 - 50, visibleSize.height / 2));

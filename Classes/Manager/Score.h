@@ -14,8 +14,9 @@ public:
 	static bool HighscoreCheck(int &score);
 	static cocos2d::Label* Update(int size);
 	static cocos2d::Label* Init(int size);
-	static cocos2d::Label* DisplayScore(int size);
+	static cocos2d::Label* DisplayScore(int size, int score);
 	static void ResetScore();
+	static void ResetHighScore(); //発表デバック用
 	static int getNowScore();
 	static int getHighScore();
 };

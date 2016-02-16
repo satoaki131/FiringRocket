@@ -58,7 +58,7 @@ bool GameScene::init()
 	this->addChild(_score, 1);
 
 	sound.BGMInit("Sound/Main.mp3");
-	//sound.BGMPlay(true);
+	sound.BGMPlay(true);
 
 	return true;
 }

@@ -2,6 +2,7 @@
 #include "Scene/Title.h"
 #include "Manager/Score.h"
 
+
 cocos2d::Scene* Result::scene()
 {
 	auto scene = cocos2d::Scene::create();
@@ -42,25 +43,36 @@ bool Result::init()
 		this->addChild(fountain, 1);
 
 		_highscore_label = cocos2d::Label::createWithTTF("HIGHSCORE!!", "fonts/JKG-M_3.ttf", 70);
-		_highscore_label->setPosition(visiblesize.width / 2, visiblesize.height - 100);
+		_highscore_label->setPosition(visiblesize.width / 2, visiblesize.height / 2 + 130);
 		_color = cocos2d::Color4B(cocos2d::random(0, 255), cocos2d::random(0, 255), cocos2d::random(0, 255), 255);
 		_highscore_label->setTextColor(_color);
 		this->addChild(_highscore_label, 1);
 		Score::_userDefault->setIntegerForKey("HIGHSCORE", score);
+
+		sound.BGMInit("Sound/HighScoreResult.mp3");
+		sound.BGMPlay(true);
 	}
 	else //違うとき
 	{
-		//スコアのリセット
-		Score::_userDefault->deleteValueForKey("HIGHSCORE");
+		_highscore_label = cocos2d::Label::createWithTTF("Now the HIGHSCORE : ", "fonts/JKG-M_3.ttf", 30);
+		_highscore_label->setPosition(visiblesize.width / 2 - 50, visiblesize.height / 2 - 50);
+		this->addChild(_highscore_label, 1);
+
+		auto highscore = Score::DisplayScore(30, Score::getHighScore());
+		highscore->setPosition(visiblesize.width / 2 + 150, visiblesize.height / 2 - 50);
+		this->addChild(highscore, 1);
+
+		sound.BGMInit("Sound/NormalResult.mp3");
+		sound.BGMPlay(true);
 	}
 
 	//共通部分
 	auto score_label = cocos2d::Label::createWithTTF("Score :", "fonts/JKG-M_3.ttf", 50);
-	score_label->setPosition(visiblesize.width / 2 - 70, visiblesize.height / 2);
+	score_label->setPosition(visiblesize.width / 2 - 70, visiblesize.height / 2 + 30);
 	this->addChild(score_label, 1);
 
-	auto scoredraw = Score::DisplayScore(50);
-	scoredraw->setPosition(visiblesize.width / 2 + 75, visiblesize.height / 2);
+	auto scoredraw = Score::DisplayScore(50, score);
+	scoredraw->setPosition(visiblesize.width / 2 + 75, visiblesize.height / 2 + 30);
 	this->addChild(scoredraw, 1);
 
 	this->scheduleUpdate();
@@ -89,6 +101,7 @@ void Result::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Even
 	if (keyCode == cocos2d::EventKeyboard::KeyCode::KEY_ENTER)
 	{
 		Score::ResetScore();
+		sound.BGMStop();
 		cocos2d::Director::getInstance()->replaceScene(
 			cocos2d::TransitionFade::create(2.0f, Title::scene(), cocos2d::Color3B::BLACK)
 			);
